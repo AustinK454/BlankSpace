@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Notepad</title>
+
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background: #692f1d72;
+            color: #bf9d325b;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+          color:hwb(0 19% 30% / 0.8470588235294118);
+          text-shadow: 0.5px 1px 1px;
+          font-family:Arial, Helvetica, sans-serif;
+        }
+      
+
+        .app {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 450px;
+            box-sizing: border-box;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #cf8e81;
+            border-radius: 10px;
+            background: hwb(43 84% 8%);
+            resize: vertical;
+            text-shadow: 0.5px 1px 0px;
+           color:#343343;
+          font-weight: bold;
+        }
+
+        button {
+           text-align:center;
+          margin-top: 10px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: hwb(0 19% 30% / 0.8470588235294118);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+          text-align: center; 
+          background: #f2eeec;
+        }
+
+        .calendar {
+          text-align:center;
+            margin-top: 30px;
+            padding: 20px;
+            background: hwb(43 84% 8%);
+            border-radius: 12px;
+            border: 2px solid #cf8e81;
+            color: hwb(0 19% 30% / 0.8470588235294118);
+        }
+      
+
+        .calendar input {
+           text-align: center;
+          padding: 10px;
+            font-size: 16px;
+        color:hwb(0 40% 28%)
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1 id="title" contenteditable="true"> My Notepad Title Here...</h1>
+
+    <textarea id="note" placeholder="Write your note here..."></textarea>
+
+    <br>
+
+    <button onclick="saveNote()">Save Note</button>
+
+    <div class="calendar">
+
+        <h2> Date </h2>
+
+        <input type="date" id="date">
+
+    </div>
+
+</div>
+
+<script>
+
+function saveNote() {
+    let note = document.getElementById("note").value;
+
+    localStorage.setItem("myNote", note);
+
+    alert("Note saved!");
+}
+
+window.onload = function() {
+    let savedNote = localStorage.getItem("myNote");
+
+    if (savedNote) {
+        document.getElementById("note").value = savedNote;
+    }
+};
+
+</script>
+
+</body>
+</html>

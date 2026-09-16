@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Reminder</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #F4E8E6;
+            color: #593A3B;
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            height: 70px;
+            background: #593A3B;
+            color: #FFF9F7;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .back {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .page-title {
+            font-size: 27px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+
+        /* =========================
+           REMINDER LIST
+        ========================= */
+
+        #reminders {
+            padding: 20px;
+        }
+
+        .reminder {
+            background: #FFF9F7;
+            border: 1px solid #D8C2C1;
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 8px #593A3B14;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .reminder.completed {
+            opacity: 0.6;
+        }
+
+        .reminder.completed .reminder-title {
+            text-decoration: line-through;
+        }
+
+
+        /* CHECKBOX */
+
+        .reminder-checkbox {
+            width: 25px;
+            height: 25px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #B86F72;
+            flex-shrink: 0;
+        }
+
+
+        /* REMINDER INFORMATION */
+
+        .reminder-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .reminder-title {
+            font-size: 21px;
+            font-weight: bold;
+            color: #593A3B;
+            word-wrap: break-word;
+        }
+
+        .reminder-date {
+            margin-top: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #806B6B;
+        }
+
+        .reminder-note {
+            margin-top: 7px;
+            font-size: 15px;
+            color: #806B6B;
+            word-wrap: break-word;
+        }
+
+
+        /* DELETE BUTTON */
+
+        .delete-reminder {
+            border: none;
+            background: transparent;
+            color: #B86F72;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 3px 5px;
+        }
+
+
+        /* =========================
+           EMPTY MESSAGE
+        ========================= */
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            color: #806B6B;
+            font-size: 20px;
+        }
+
+
+        /* =========================
+           ADD BUTTON
+        ========================= */
+
+        .add-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            background: #B86F72;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px #00000055;
+            transition: transform 0.2s;
+        }
+
+        .add-button:hover {
+            background: #9F5D61;
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           REMINDER EDITOR
+        ========================= */
+
+        .reminder-editor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFF9F7;
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .reminder-editor.show {
+            display: block;
+        }
+
+
+        .editor-top {
+            background: #593A3B;
+            color: #FFF9F7;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .editor-back {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .editor-title {
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .save-button {
+            background: #B86F72;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form {
+            padding: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            color: #593A3B;
+        }
+
+        .form-label:first-child {
+            margin-top: 0;
+        }
+
+        .form-input {
+            width: 100%;
+            border: 1px solid #D8C2C1;
+            border-radius: 10px;
+            background: #F4E8E6;
+            padding: 14px;
+            font-size: 18px;
+            color: #593A3B;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #B86F72;
+        }
+
+        textarea.form-input {
+            height: 140px;
+            resize: none;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           COMPLETED SECTION
+        ========================= */
+
+        .section-title {
+            padding: 20px 20px 5px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #593A3B;
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark {
+            background: #292627;
+            color: #F4E8E6;
+        }
+
+        body.dark .reminder {
+            background: #3A3030;
+            border-color: #514344;
+            box-shadow: 0 3px 8px #00000033;
+        }
+
+        body.dark .reminder-title {
+            color: #F4E8E6;
+        }
+
+        body.dark .reminder-date,
+        body.dark .reminder-note {
+            color: #B8A5A3;
+        }
+
+        body.dark .empty {
+            color: #B8A5A3;
+        }
+
+        body.dark .reminder-editor {
+            background: #3A3030;
+        }
+
+        body.dark .form-label {
+            color: #F4E8E6;
+        }
+
+        body.dark .form-input {
+            background: #292627;
+            color: #F4E8E6;
+            border-color: #514344;
+        }
+
+        body.dark .form-input::placeholder {
+            color: #8F7D7C;
+        }
+
+        body.dark .section-title {
+            color: #F4E8E6;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                height: 65px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            #reminders {
+                padding: 15px;
+            }
+
+            .reminder {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+
+    <div
+        class="back"
+        onclick="goBack()"
+    >
+        ←
+    </div>
+
+    <div class="page-title">
+        Reminders
+    </div>
+
+</div>
+
+
+<!-- =========================
+     REMINDERS
+========================= -->
+
+<div id="reminders"></div>
+
+
+<!-- =========================
+     ADD BUTTON
+========================= -->
+
+<button
+    class="add-button"
+    onclick="newReminder()"
+>
+    +
+</button>
+
+
+<!-- =========================
+     REMINDER EDITOR
+========================= -->
+
+<div
+    class="reminder-editor"
+    id="reminderEditor"
+>
+
+    <div class="editor-top">
+
+        <div
+            class="editor-back"
+            onclick="closeEditor()"
+        >
+            ←
+        </div>
+
+        <div class="editor-title">
+            New Reminder
+        </div>
+
+        <button
+            class="save-button"
+            onclick="saveReminder()"
+        >
+            Save
+        </button>
+
+    </div>
+
+
+    <div class="form">
+
+        <label class="form-label">
+            Reminder
+        </label>
+
+        <input
+            class="form-input"
+            id="reminderTitle"
+            type="text"
+            placeholder="What do you need to remember?"
+        >
+
+
+        <label class="form-label">
+            Date
+        </label>
+
+        <input
+            class="form-input"
+            id="reminderDate"
+            type="date"
+        >
+
+
+        <label class="form-label">
+            Time
+        </label>
+
+        <input
+            class="form-input"
+            id="reminderTime"
+            type="time"
+        >
+
+
+        <label class="form-label">
+            Notes
+        </label>
+
+        <textarea
+            class="form-input"
+            id="reminderNote"
+            placeholder="Add some details..."
+        ></textarea>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+    /* =========================
+       LOAD DARK MODE
+    ========================= */
+
+    if (
+        localStorage.getItem("darkMode") === "true"
+    ) {
+
+        document.body.classList.add("dark");
+
+    }
+
+
+    /* =========================
+       DELETE CONFIRMATION
+    ========================= */
+
+    function shouldConfirmDelete(message) {
+
+        return localStorage.getItem(
+            "deleteConfirmation"
+        ) !== "false"
+
+            ? confirm(message)
+
+            : true;
+
+    }
+
+
+    /* =========================
+       DATA
+    ========================= */
+
+    let reminders =
+        JSON.parse(
+            localStorage.getItem("reminders")
+        ) || [];
+
+    let currentReminder = null;
+
+
+    /* =========================
+       DISPLAY REMINDERS
+    ========================= */
+
+    function displayReminders() {
+
+        const container =
+            document.getElementById(
+                "reminders"
+            );
+
+        container.innerHTML = "";
+
+
+        if (reminders.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    No reminders yet.<br><br>
+
+                    Tap + to create your first reminder.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* SORT BY DATE AND TIME */
+
+        reminders.sort(
+            function(a, b) {
+
+                const dateA =
+                    new Date(
+                        a.date +
+                        "T" +
+                        (a.time || "00:00")
+                    );
+
+                const dateB =
+                    new Date(
+                        b.date +
+                        "T" +
+                        (b.time || "00:00")
+                    );
+
+                return dateA - dateB;
+
+            }
+        );
+
+
+        reminders.forEach(
+            function(reminder, index) {
+
+                const box =
+                    document.createElement(
+                        "div"
+                    );
+
+                box.className =
+                    "reminder";
+
+
+                if (
+                    reminder.completed
+                ) {
+
+                    box.classList.add(
+                        "completed"
+                    );
+
+                }
+
+
+                /* CHECKBOX */
+
+                const checkbox =
+                    document.createElement(
+                        "input"
+                    );
+
+                checkbox.type =
+                    "checkbox";
+
+                checkbox.className =
+                    "reminder-checkbox";
+
+                checkbox.checked =
+                    reminder.completed;
+
+
+                checkbox.onchange =
+                    function() {
+
+                        reminder.completed =
+                            checkbox.checked;
+
+                        saveData();
+
+                        displayReminders();
+
+                    };
+
+
+                /* INFORMATION */
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+                info.className =
+                    "reminder-info";
+
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+                title.className =
+                    "reminder-title";
+
+                title.textContent =
+                    reminder.title;
+
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+                date.className =
+                    "reminder-date";
+
+                date.textContent =
+                    formatReminderDate(
+                        reminder.date,
+                        reminder.time
+                    );
+
+
+                info.appendChild(
+                    title
+                );
+
+                info.appendChild(
+                    date
+                );
+
+
+                if (
+                    reminder.note
+                ) {
+
+                    const note =
+                        document.createElement(
+                            "div"
+                        );
+
+                    note.className =
+                        "reminder-note";
+
+                    note.textContent =
+                        reminder.note;
+
+                    info.appendChild(
+                        note
+                    );
+
+                }
+
+
+                /* DELETE */
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.className =
+                    "delete-reminder";
+
+                deleteButton.textContent =
+                    "×";
+
+
+                deleteButton.onclick =
+                    function() {
+
+                        if (
+                            shouldConfirmDelete(
+                                "Delete this reminder?"
+                            )
+                        ) {
+
+                            reminders.splice(
+                                index,
+                                1
+                            );
+
+                            saveData();
+
+                            displayReminders();
+
+                        }
+
+                    };
+
+
+                box.appendChild(
+                    checkbox
+                );
+
+                box.appendChild(
+                    info
+                );
+
+                box.appendChild(
+                    deleteButton
+                );
+
+
+                container.appendChild(
+                    box
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================
+       NEW REMINDER
+    ========================= */
+
+    function newReminder() {
+
+        currentReminder = null;
+
+
+        document.getElementById(
+            "reminderTitle"
+        ).value = "";
+
+
+        document.getElementById(
+            "reminderDate"
+        ).value = "";
+
+
+        document.getElementById(
+            "reminderTime"
+        ).value = "";
+
+
+        document.getElementById(
+            "reminderNote"
+        ).value = "";
+
+
+        document.getElementById(
+            "reminderEditor"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+
+    /* =========================
+       SAVE REMINDER
+    ========================= */
+
+    function saveReminder() {
+
+        const title =
+            document.getElementById(
+                "reminderTitle"
+            ).value.trim();
+
+
+        const date =
+            document.getElementById(
+                "reminderDate"
+            ).value;
+
+
+        const time =
+            document.getElementById(
+                "reminderTime"
+            ).value;
+
+
+        const note =
+            document.getElementById(
+                "reminderNote"
+            ).value.trim();
+
+
+        if (
+            title === ""
+        ) {
+
+            alert(
+                "Give your reminder a name first!"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            date === ""
+        ) {
+
+            alert(
+                "Choose a date for your reminder."
+            );
+
+            return;
+
+        }
+
+
+        const reminderData = {
+
+            title:
+                title,
+
+            date:
+                date,
+
+            time:
+                time,
+
+            note:
+                note,
+
+            completed:
+                false
+
+        };
+
+
+        if (
+            currentReminder === null
+        ) {
+
+            reminders.push(
+                reminderData
+            );
+
+        }
+
+        else {
+
+            reminders[currentReminder] =
+                reminderData;
+
+        }
+
+
+        saveData();
+
+        closeEditor();
+
+        displayReminders();
+
+    }
+
+
+    /* =========================
+       CLOSE EDITOR
+    ========================= */
+
+    function closeEditor() {
+
+        document.getElementById(
+            "reminderEditor"
+        ).classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =========================
+       SAVE DATA
+    ========================= */
+
+    function saveData() {
+
+        localStorage.setItem(
+            "reminders",
+            JSON.stringify(
+                reminders
+            )
+        );
+
+    }
+
+
+    /* =========================
+       FORMAT DATE
+    ========================= */
+
+    function formatReminderDate(
+        date,
+        time
+    ) {
+
+        const reminderDate =
+            new Date(
+                date +
+                "T" +
+                (time || "00:00")
+            );
+
+
+        let result =
+            reminderDate.toLocaleDateString(
+                undefined,
+                {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+
+        if (
+            time
+        ) {
+
+            result +=
+                " • " +
+                reminderDate.toLocaleTimeString(
+                    undefined,
+                    {
+                        hour: "numeric",
+                        minute: "2-digit"
+                    }
+                );
+
+        }
+
+
+        return result;
+
+    }
+
+
+    /* =========================
+       GO BACK
+    ========================= */
+
+    function goBack() {
+
+        window.location.href =
+            "notes.html";
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    displayReminders();
+
+
+</script>
+
+
+</body>
+
+</html>
