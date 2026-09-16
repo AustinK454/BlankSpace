@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Blank Space</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #F4E8E6;
+            color: #593A3B;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           WELCOME POPUP
+        ========================= */
+
+        .welcome-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 85%;
+            max-width: 340px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            text-align: center;
+            box-shadow: none;
+            z-index: 10000;
+            animation: welcomeIn 0.4s ease forwards;
+        }
+
+        .welcome-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+
+            width: 100%;
+            height: 100vh;
+
+            background-color: #F4E8E6;
+
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent 1px,
+                transparent 39px,
+                rgba(184, 111, 114, 0.7) 40px,
+                transparent 40px
+            );
+
+            border: none;
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            box-shadow: none;
+
+            z-index: 10000;
+
+            animation: welcomeIn 0.4s ease forwards;
+        }
+
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .welcome-brand {
+            font-size: 30px;
+            font-weight: bold;
+            color: #593A3B;
+        }
+
+        .welcome-screen {
+            background-color: #F4E8E6;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 39px,
+                rgba(180, 95, 99, 0.7) 40px
+            );
+        }
+
+        .welcome-bubble {
+            background: #FFF9F7;
+            border: 1px solid #D8C2C1;
+            border-radius: 20px;
+            height: 163px;
+            width: 320px;
+            padding: 13px 25px;
+            text-align: center;
+
+            box-shadow: 0 10px 30px #593A3B33;
+        }
+
+        .welcome-icon {
+            font-size: 34px;
+            margin-bottom: 2px;
+        }
+
+        .welcome-popup h2 {
+            margin: 0 0 6px;
+            color: #593A3B;
+            font-size: 23px;
+        }
+
+        .welcome-popup p {
+            margin: 0;
+            color: #806B6B;
+            font-size: 16px;
+        }
+
+        .welcome-popup.hide {
+            animation: welcomeOut 0.4s ease forwards;
+        }
+
+        @keyframes welcomeIn {
+
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+        }
+
+        @keyframes welcomeOut {
+
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            height: 70px;
+            background: #593A3B;
+            color: #FFF9F7;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 25px;
+        }
+
+        .menu {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .app-name {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+
+        /* =========================
+           BLANK SPACE KEYBOARD LOGO
+        ========================= */
+
+        .blank-space-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #FFF9F7;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .spacebar-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 115px;
+            height: 40px;
+            padding: 0 15px;
+
+            background: #D9A6A6;
+
+            border: 2px solid #B86F72;
+            border-radius: 9px;
+
+            box-shadow:
+                0 3px 0 #9F5D61,
+                0 5px 8px #00000022;
+
+            color: #593A3B;
+            font-size: 20px;
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+        .spacebar-logo span {
+            line-height: 1;
+        }
+
+        .welcome-logo {
+            color: #593A3B;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .welcome-logo .spacebar-logo {
+            width: 125px;
+            height: 42px;
+        }
+
+
+        /* =========================
+           SORT BAR
+        ========================= */
+
+        .sortbar {
+            background: #D9A6A6;
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+            border-bottom: 3px solid #B86F72;
+        }
+
+        .sortbar-left {
+            text-align: left;
+        }
+
+        .sortbar-center {
+            text-align: center;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+
+        .sortbar-right {
+            text-align: right;
+        }
+
+
+        /* =========================
+           HOME REVEAL ANIMATION
+        ========================= */
+
+        #home {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        #home.show-home {
+            animation: revealHome 0.9s ease forwards;
+        }
+
+        @keyframes revealHome {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           NOTES
+        ========================= */
+
+        #notes {
+            background: #FFF9F7;
+            min-height: calc(100vh - 130px);
+            position: relative;
+            padding-left: 28px;
+        }
+
+
+        /* =========================
+           CURVED NOTEBOOK BINDING
+        ========================= */
+
+        #notes::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 6px;
+
+            top: 15px;
+
+            bottom: 15px;
+
+            width: 50px;
+
+            background:
+                radial-gradient(
+                    ellipse 12px 15px at 0% 50%,
+                    transparent 0px,
+                    transparent 7px,
+                    #A9A9A9 7px,
+                    #A9A9A9 9px,
+                    transparent 9px,
+                    transparent 100%
+                );
+
+            background-size: 20px 42px;
+
+            background-repeat: repeat-y;
+
+            opacity: 0.75;
+
+            pointer-events: none;
+        }
+
+
+        .note {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #D8C2C1;
+            cursor: pointer;
+        }
+
+        .note:hover {
+            background: #F4E8E6;
+        }
+
+        .note-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #B86F72;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            margin-right: 18px;
+            flex-shrink: 0;
+        }
+
+        .note-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .note-title {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .note-preview {
+            margin-top: 5px;
+            color: #806B6B;
+            font-size: 17px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .note-date {
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+
+        /* =========================
+           FAVORITE STAR
+        ========================= */
+
+        .favorite-button {
+            font-size: 30px;
+            padding: 8px;
+            color: #593A3B;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+
+        .favorite-button.favorite {
+            color: #D4A72C;
+        }
+
+        .favorite-button:hover {
+            transform: scale(1.15);
+        }
+
+        .favorite-button.favorite-pop {
+            animation: favoritePop 0.2s ease;
+        }
+
+        @keyframes favoritePop {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
+        /* =========================
+           DELETE BUTTON
+        ========================= */
+
+        .delete-button {
+            font-size: 25px;
+            padding: 10px;
+            color: #593A3B;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           ADD BUTTON
+        ========================= */
+
+        .add-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            background: #B86F72;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px #00000055;
+            transition: transform 0.2s;
+        }
+
+        .add-button:hover {
+            background: #9F5D61;
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           CREATE MENU
+        ========================= */
+
+        .create-menu {
+            position: fixed;
+            right: 25px;
+            bottom: 100px;
+            width: 220px;
+            background: #FFF9F7;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #00000033;
+            padding: 10px;
+            display: none;
+            z-index: 500;
+        }
+
+        .create-menu.show {
+            display: block;
+            animation: menuAppear 0.2s ease;
+        }
+
+        @keyframes menuAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        .create-option {
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .create-option:hover {
+            background: #F4E8E6;
+        }
+
+
+        /* =========================
+           EDITOR
+        ========================= */
+
+        #editor {
+            display: none;
+            min-height: 100vh;
+            background: #FFF9F7;
+        }
+
+        .editor-top {
+            background: #593A3B;
+            color: #FFF9F7;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .editor-title {
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .save {
+            background: #B86F72;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .editor-content {
+            padding: 25px;
+        }
+
+        #titleInput {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #B86F72;
+            background: transparent;
+            font-size: 30px;
+            font-weight: bold;
+            color: #593A3B;
+            padding: 10px 0;
+            outline: none;
+        }
+
+        #noteInput {
+            width: 100%;
+            height: 60vh;
+            margin-top: 20px;
+            border: none;
+            outline: none;
+            resize: none;
+            background: transparent;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            color: #593A3B;
+        }
+
+
+        /* =========================
+           PAGE TURN
+        ========================= */
+
+        body.page-turn {
+            overflow: hidden;
+        }
+
+        body.page-turn #editor {
+            display: block !important;
+            transform-origin: left center;
+            animation: pageTurn 0.65s ease-in forwards;
+            backface-visibility: hidden;
+        }
+
+        @keyframes pageTurn {
+
+            0% {
+                transform:
+                    perspective(1200px)
+                    rotateY(0deg)
+                    scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    perspective(1200px)
+                    rotateY(-90deg)
+                    scale(0.96);
+                opacity: 0;
+            }
+
+        }
+
+
+        .delete-note {
+            background: #B86F72;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           TODO EDITOR
+        ========================= */
+
+        #todoEditor {
+            display: none;
+            min-height: 100vh;
+            background: #FFF9F7;
+        }
+
+        .todo-top {
+            background: #593A3B;
+            color: #FFF9F7;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .todo-back {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .todo-title {
+            flex: 1;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .todo-save {
+            background: #B86F72;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .todo-content {
+            padding: 25px;
+        }
+
+        #todoTitleInput {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #B86F72;
+            background: transparent;
+            font-size: 30px;
+            font-weight: bold;
+            color: #593A3B;
+            padding: 10px 0;
+            outline: none;
+        }
+
+        .todo-counter {
+            margin-top: 15px;
+            color: #806B6B;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        #todoItems {
+            margin-top: 25px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 5px;
+            border-bottom: 1px solid #D8C2C1;
+        }
+
+        .todo-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #B86F72;
+            flex-shrink: 0;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 23px;
+            outline: none;
+            min-width: 0;
+            transition: color 0.3s;
+            border: none;
+            background: transparent;
+            color: #593A3B;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #A99797;
+            animation: strike 0.3s ease;
+        }
+
+        @keyframes strike {
+
+            from {
+                text-decoration-color: transparent;
+            }
+
+            to {
+                text-decoration-color: #A99797;
+            }
+
+        }
+
+        .remove-todo {
+            border: none;
+            background: transparent;
+            color: #B86F72;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .add-task {
+            margin-top: 20px;
+            background: #D9A6A6;
+            color: #593A3B;
+            border: none;
+            padding: 13px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .delete-todo-list {
+            margin-top: 30px;
+            background: #B86F72;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           SIDE NAVIGATION
+        ========================= */
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background: #FFF9F7;
+            z-index: 1000;
+            box-shadow: 5px 0 15px #00000033;
+            transition: left 0.3s ease;
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-header {
+            height: 100px;
+            background: #593A3B;
+            color:#B86F72 ;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-family: rubik-bold;
+        }
+
+        .menu-title {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .close-menu {
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .menu-item {
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #D8C2C1;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: #F4E8E6;
+        }
+
+
+        /* =========================
+           OVERLAY
+        ========================= */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00000066;
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark-mode {
+            background: #2F2928;
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .topbar {
+            background: #242120;
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .sortbar {
+            background: #4A3A37;
+            color: #C9A7A0;
+            border-bottom-color: #B86F72;
+        }
+
+        body.dark-mode #notes {
+            background: #3A3230;
+        }
+
+        body.dark-mode #notes::before {
+            opacity: 0.45;
+        }
+
+        body.dark-mode .note {
+            border-bottom-color: #594A47;
+        }
+
+        body.dark-mode .note:hover {
+            background: #463B38;
+        }
+
+        body.dark-mode .note-title {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .note-preview {
+            color: #A99089;
+        }
+
+        body.dark-mode .note-date {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .favorite-button {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .delete-button {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .create-menu {
+            background: #403735;
+        }
+
+        body.dark-mode .create-option {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .create-option:hover {
+            background: #50413E;
+        }
+
+        body.dark-mode #editor,
+        body.dark-mode #todoEditor {
+            background: #3A3230;
+        }
+
+        body.dark-mode .editor-top,
+        body.dark-mode .todo-top {
+            background: #242120;
+        }
+
+        body.dark-mode #titleInput,
+        body.dark-mode #noteInput,
+        body.dark-mode #todoTitleInput,
+        body.dark-mode .todo-text {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode #titleInput::placeholder,
+        body.dark-mode #noteInput::placeholder,
+        body.dark-mode #todoTitleInput::placeholder,
+        body.dark-mode .todo-text::placeholder {
+            color: #806F6A;
+        }
+
+        body.dark-mode .todo-counter {
+            color: #A99089;
+        }
+
+        body.dark-mode .todo-item {
+            border-bottom-color: #594A47;
+        }
+
+        body.dark-mode .side-menu {
+            background: #3A3230;
+        }
+
+        body.dark-mode .menu-header {
+            background: #242120;
+        }
+
+        body.dark-mode .menu-item {
+            color: #C9A7A0;
+            border-bottom-color: #594A47;
+        }
+
+        body.dark-mode .menu-item:hover {
+            background: #463B38;
+        }
+
+        body.dark-mode .welcome-brand {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .welcome-bubble {
+            background: #593A3B;
+            border-color: #B86F72;
+        }
+
+        body.dark-mode .welcome-popup h2 {
+            color: #C9A7A0;
+        }
+
+        body.dark-mode .welcome-popup p {
+            color: #A99089;
+        }
+
+        body.dark-mode .spacebar-logo {
+            background: #593A3B;
+            border-color: #B86F72;
+
+            box-shadow:
+                0 3px 0 #8F5659,
+                0 5px 8px #00000055;
+
+            color: #C9A7A0;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                height: 65px;
+                padding: 0 15px;
+                gap: 15px;
+            }
+
+            .blank-space-logo {
+                font-size: 18px;
+                gap: 6px;
+            }
+
+            .spacebar-logo {
+                width: 95px;
+                height: 37px;
+                font-size: 17px;
+                padding: 0 10px;
+            }
+
+            .welcome-logo {
+                font-size: 21px;
+            }
+
+            .welcome-logo .spacebar-logo {
+                width: 105px;
+                height: 39px;
+            }
+
+            .welcome-bubble {
+                width: 290px;
+            }
+
+            .sortbar {
+                font-size: 21px;
+            }
+
+            .sortbar-center {
+                font-size: 14px;
+            }
+
+            .note {
+                padding: 15px;
+            }
+
+            .note-title {
+                font-size: 20px;
+            }
+
+            .note-preview {
+                font-size: 15px;
+            }
+
+            .side-menu {
+                width: 280px;
+            }
+
+            .favorite-button {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     WELCOME POPUP
+========================= -->
+
+<div class="welcome-popup" id="welcomePopup">
+
+    <div class="welcome-container">
+
+        <div class="welcome-brand">
+
+            <div class="blank-space-logo welcome-logo">
+
+                <span>Blank</span>
+
+                <div class="spacebar-logo">
+                    <span>Space</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="welcome-bubble">
+
+            <div class="welcome-icon" id="welcomeIcon">
+                ☀️
+            </div>
+
+            <h2 id="welcomeGreeting">
+                Good morning!
+            </h2>
+
+            <p id="welcomeMessage">
+                Ready to make today a good one?
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div class="side-menu" id="sideMenu">
+
+    <div class="menu-header">
+
+        <div class="menu-title">
+            BLANK SPACE
+        </div>
+
+        <div class="close-menu" onclick="closeMenu()">
+            ×
+        </div>
+
+    </div>
+
+
+    <div class="menu-item" onclick="goToNotes()">
+        📝 My Notes
+    </div>
+
+    <div class="menu-item" onclick="goTocalendar()">
+        📅 Calendar
+    </div>
+
+    <div class="menu-item" onclick="openReminders()">
+        ⏰ Reminders
+    </div>
+
+    <div class="menu-item" onclick="openTerms()">
+        📄 Terms & Conditions
+    </div>
+
+    <div class="menu-item" onclick="openPrivacy()">
+        🔒 Privacy Policy
+    </div>
+
+    <div class="menu-item" onclick="openSettings()">
+        ⚙️ Settings
+    </div>
+
+    <!-- =========================
+         HELP & SUPPORT
+    ========================= -->
+
+    <div class="menu-item" onclick="contactSupport()">
+        ✉️ Help & Support
+    </div>
+
+</div>
+
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeMenu()"
+></div>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<div id="home">
+
+    <div class="topbar">
+
+        <div
+            class="menu"
+            onclick="openMenu()"
+        >
+            ☰
+        </div>
+
+
+        <div class="app-name">
+
+            <div class="blank-space-logo">
+
+                <span>Blank</span>
+
+                <div class="spacebar-logo">
+
+                    <span>Space</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="sortbar">
+
+        <div class="sortbar-left">
+            Title ↕
+        </div>
+
+        <div class="sortbar-center">
+
+            <span id="completedTodayCount">
+                0 completed today
+            </span>
+
+        </div>
+
+        <div class="sortbar-right">
+            Date ↑
+        </div>
+
+    </div>
+
+
+    <div id="notes"></div>
+
+
+    <div
+        class="create-menu"
+        id="createMenu"
+    >
+
+        <div
+            class="create-option"
+            onclick="createNote()"
+        >
+            New Note
+        </div>
+
+        <div
+            class="create-option"
+            onclick="createTodo()"
+        >
+            To-Do List
+        </div>
+
+    </div>
+
+
+    <button
+        class="add-button"
+        onclick="toggleCreateMenu()"
+    >
+        +
+    </button>
+
+</div>
+
+
+<!-- =========================
+     NORMAL NOTE EDITOR
+========================= -->
+
+<div id="editor">
+
+    <div class="editor-top">
+
+        <div
+            class="back"
+            onclick="goBack()"
+        >
+            ←
+        </div>
+
+        <div class="editor-title">
+            Note
+        </div>
+
+        <button
+            class="save"
+            onclick="saveNote()"
+        >
+            Save
+        </button>
+
+    </div>
+
+
+    <div class="editor-content">
+
+        <input
+            type="text"
+            id="titleInput"
+            placeholder="Note title..."
+        >
+
+        <textarea
+            id="noteInput"
+            placeholder="Start writing..."
+        ></textarea>
+
+
+        <button
+            class="delete-note"
+            onclick="deleteNote()"
+        >
+            Delete Note
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TODO EDITOR
+========================= -->
+
+<div id="todoEditor">
+
+    <div class="todo-top">
+
+        <div
+            class="todo-back"
+            onclick="goBackFromTodo()"
+        >
+            ←
+        </div>
+
+        <div class="todo-title">
+            To-Do List
+        </div>
+
+        <button
+            class="todo-save"
+            onclick="saveTodo()"
+        >
+            Save
+        </button>
+
+    </div>
+
+
+    <div class="todo-content">
+
+        <input
+            type="text"
+            id="todoTitleInput"
+            placeholder="List title..."
+        >
+
+
+        <div
+            class="todo-counter"
+            id="todoCounter"
+        >
+            0 / 0 completed
+        </div>
+
+
+        <div id="todoItems"></div>
+
+
+        <button
+            class="add-task"
+            onclick="addTodoItem()"
+        >
+            + Add Task
+        </button>
+
+
+        <br>
+
+
+        <button
+            class="delete-todo-list"
+            onclick="deleteTodo()"
+        >
+            Delete List
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+    /* =========================
+       LOAD DARK MODE
+    ========================= */
+
+    if (
+        localStorage.getItem("darkMode") === "true"
+    ) {
+
+        document.body.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+
+    /* =========================
+       DELETE CONFIRMATION
+    ========================= */
+
+    function shouldConfirmDelete(message) {
+
+        return localStorage.getItem(
+            "deleteConfirmation"
+        ) !== "false"
+
+            ? confirm(message)
+
+            : true;
+
+    }
+
+
+    /* =========================
+       DATA
+    ========================= */
+
+    let notes =
+        JSON.parse(
+            localStorage.getItem("notes")
+        ) || [];
+
+
+    let currentNote = null;
+
+    let currentTodo = null;
+
+    let todoItems = [];
+
+
+    /* =========================
+       WELCOME POPUP
+    ========================= */
+
+    function showWelcome() {
+
+        const hour =
+            new Date().getHours();
+
+
+        let greeting;
+        let message;
+        let icon;
+
+
+        if (
+            hour >= 5 &&
+            hour < 12
+        ) {
+
+            greeting =
+                "Good morning!";
+
+            message =
+                "Ready to make today a good one?";
+
+            icon =
+                "☀️";
+
+        }
+
+
+        else if (
+            hour >= 12 &&
+            hour < 17
+        ) {
+
+            greeting =
+                "Good afternoon!";
+
+            message =
+                "Hope your day is going well.";
+
+            icon =
+                "🌤️";
+
+        }
+
+
+        else if (
+            hour >= 17 &&
+            hour < 21
+        ) {
+
+            greeting =
+                "Good evening!";
+
+            message =
+                "How's your day going?";
+
+            icon =
+                "🌅";
+
+        }
+
+
+        else {
+
+            greeting =
+                "Good night!";
+
+            message =
+                "Time to wind down.";
+
+            icon =
+                "🌙";
+
+        }
+
+
+        document.getElementById(
+            "welcomeGreeting"
+        ).textContent =
+            greeting;
+
+
+        document.getElementById(
+            "welcomeMessage"
+        ).textContent =
+            message;
+
+
+        document.getElementById(
+            "welcomeIcon"
+        ).textContent =
+            icon;
+
+
+        const popup =
+            document.getElementById(
+                "welcomePopup"
+            );
+
+
+        setTimeout(function() {
+
+            popup.classList.add(
+                "hide"
+            );
+
+
+            setTimeout(function() {
+
+                popup.remove();
+
+
+                const home =
+                    document.getElementById(
+                        "home"
+                    );
+
+
+                home.classList.add(
+                    "show-home"
+                );
+
+
+            }, 400);
+
+
+        }, 2500);
+
+    }
+
+
+    /* =========================
+       SIDE MENU
+    ========================= */
+
+    function openMenu() {
+
+        document.getElementById(
+            "sideMenu"
+        ).classList.add(
+            "open"
+        );
+
+
+        document.getElementById(
+            "overlay"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+
+    function closeMenu() {
+
+        document.getElementById(
+            "sideMenu"
+        ).classList.remove(
+            "open"
+        );
+
+
+        document.getElementById(
+            "overlay"
+        ).classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    function goToNotes() {
+
+        closeMenu();
+
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "block";
+
+
+        displayNotes();
+
+    }
+
+
+    function goTocalendar() {
+
+        closeMenu();
+
+        window.location.href =
+            "Calender.html";
+
+    }
+
+
+    function openReminders() {
+
+        closeMenu();
+
+        window.location.href =
+            "Reminder.html";
+
+    }
+
+
+    function openTerms() {
+
+        closeMenu();
+
+        window.location.href =
+            "Terms.html";
+
+    }
+
+
+    function openPrivacy() {
+
+        closeMenu();
+
+        window.location.href =
+            "Privacy.html";
+
+    }
+
+
+    function openSettings() {
+
+        closeMenu();
+
+        window.location.href =
+            "Settings.html";
+
+    }
+
+
+    /* =========================
+       HELP & SUPPORT
+    ========================= */
+
+    
+
+    function openSupport() {
+    closeMenu();
+    window.location.href =
+        "mailto:blankspacenotepad@gmail.com?subject=" +
+        encodeURIComponent("Blank Space Support");
+    }
+
+
+    /* =========================
+       CREATE MENU
+    ========================= */
+
+    function toggleCreateMenu() {
+
+        document.getElementById(
+            "createMenu"
+        ).classList.toggle(
+            "show"
+        );
+
+    }
+
+
+    function createNote() {
+
+        document.getElementById(
+            "createMenu"
+        ).classList.remove(
+            "show"
+        );
+
+
+        newNote();
+
+    }
+
+
+    function createTodo() {
+
+        document.getElementById(
+            "createMenu"
+        ).classList.remove(
+            "show"
+        );
+
+
+        currentTodo =
+            null;
+
+
+        todoItems =
+            [];
+
+
+        document.getElementById(
+            "todoTitleInput"
+        ).value =
+            "";
+
+
+        renderTodoItems();
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "block";
+
+    }
+
+
+    /* =========================
+       SHOW NOTES
+    ========================= */
+
+    function displayNotes() {
+
+        const notesContainer =
+            document.getElementById(
+                "notes"
+            );
+
+
+        notesContainer.innerHTML =
+            "";
+
+
+        if (
+            notes.length === 0
+        ) {
+
+            notesContainer.innerHTML = `
+
+                <div style="
+                    text-align:center;
+                    padding:60px 20px;
+                    color:#806B6B;
+                    font-size:20px;
+                ">
+
+                    No notes yet.<br><br>
+
+                    Tap + to create your first note.
+
+                </div>
+
+            `;
+
+
+            updateCompletedToday();
+
+
+            return;
+
+        }
+
+
+        const sortedNotes =
+            [...notes].sort(
+                function(a, b) {
+
+                    if (
+                        a.favorite &&
+                        !b.favorite
+                    ) {
+
+                        return -1;
+
+                    }
+
+
+                    if (
+                        !a.favorite &&
+                        b.favorite
+                    ) {
+
+                        return 1;
+
+                    }
+
+
+                    return 0;
+
+                }
+            );
+
+
+        sortedNotes.forEach(
+            function(note) {
+
+                const index =
+                    notes.indexOf(
+                        note
+                    );
+
+
+                const noteElement =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                noteElement.className =
+                    "note";
+
+
+                const icon =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                icon.className =
+                    "note-icon";
+
+
+                icon.textContent =
+                    note.type === "todo"
+                        ? "☑"
+                        : "✎";
+
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                info.className =
+                    "note-info";
+
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                title.className =
+                    "note-title";
+
+
+                title.textContent =
+                    note.title ||
+                    "Untitled";
+
+
+                const preview =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                preview.className =
+                    "note-preview";
+
+
+                if (
+                    note.type === "todo"
+                ) {
+
+                    const completed =
+                        note.items
+                            ? note.items.filter(
+                                item =>
+                                    item.completed
+                            ).length
+                            : 0;
+
+
+                    const total =
+                        note.items
+                            ? note.items.length
+                            : 0;
+
+
+                    preview.textContent =
+                        completed +
+                        " / " +
+                        total +
+                        " completed";
+
+                }
+
+
+                else {
+
+                    preview.textContent =
+                        note.text ||
+                        "No text";
+
+                }
+
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                date.className =
+                    "note-date";
+
+
+                date.textContent =
+                    note.date;
+
+
+                info.appendChild(
+                    title
+                );
+
+
+                info.appendChild(
+                    preview
+                );
+
+
+                info.appendChild(
+                    date
+                );
+
+
+                const favoriteButton =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                favoriteButton.className =
+                    "favorite-button";
+
+
+                favoriteButton.textContent =
+                    note.favorite
+                        ? "★"
+                        : "☆";
+
+
+                if (
+                    note.favorite
+                ) {
+
+                    favoriteButton.classList.add(
+                        "favorite"
+                    );
+
+                }
+
+
+                favoriteButton.onclick =
+                    function(event) {
+
+                        event.stopPropagation();
+
+
+                        note.favorite =
+                            !note.favorite;
+
+
+                        localStorage.setItem(
+                            "notes",
+                            JSON.stringify(
+                                notes
+                            )
+                        );
+
+
+                        favoriteButton.classList.add(
+                            "favorite-pop"
+                        );
+
+
+                        setTimeout(
+                            function() {
+
+                                displayNotes();
+
+                            },
+                            200
+                        );
+
+                    };
+
+
+                const deleteButton =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                deleteButton.className =
+                    "delete-button";
+
+
+                deleteButton.textContent =
+                    "⋮";
+
+
+                deleteButton.onclick =
+                    function(event) {
+
+                        event.stopPropagation();
+
+
+                        if (
+                            shouldConfirmDelete(
+                                "Delete this item?"
+                            )
+                        ) {
+
+                            notes.splice(
+                                index,
+                                1
+                            );
+
+
+                            localStorage.setItem(
+                                "notes",
+                                JSON.stringify(
+                                    notes
+                                )
+                            );
+
+
+                            displayNotes();
+
+                        }
+
+                    };
+
+
+                noteElement.appendChild(
+                    icon
+                );
+
+
+                noteElement.appendChild(
+                    info
+                );
+
+
+                noteElement.appendChild(
+                    favoriteButton
+                );
+
+
+                noteElement.appendChild(
+                    deleteButton
+                );
+
+
+                noteElement.onclick =
+                    function() {
+
+                        if (
+                            note.type === "todo"
+                        ) {
+
+                            openTodo(
+                                index
+                            );
+
+                        }
+
+                        else {
+
+                            openNote(
+                                index
+                            );
+
+                        }
+
+                    };
+
+
+                notesContainer.appendChild(
+                    noteElement
+                );
+
+            }
+        );
+
+
+        updateCompletedToday();
+
+    }
+
+
+    /* =========================
+       COMPLETED TODAY
+    ========================= */
+
+    function getTodayKey() {
+
+        const today =
+            new Date();
+
+
+        return (
+
+            today.getFullYear() +
+
+            "-" +
+
+            String(
+                today.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            ) +
+
+            "-" +
+
+            String(
+                today.getDate()
+            ).padStart(
+                2,
+                "0"
+            )
+
+        );
+
+    }
+
+
+    function updateCompletedToday() {
+
+        const today =
+            getTodayKey();
+
+
+        let completedToday =
+            0;
+
+
+        notes.forEach(
+            function(note) {
+
+                if (
+                    note.type === "todo" &&
+                    note.items
+                ) {
+
+                    note.items.forEach(
+                        function(item) {
+
+                            if (
+                                item.completed &&
+                                item.completedDate === today
+                            ) {
+
+                                completedToday++;
+
+                            }
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+
+        document.getElementById(
+            "completedTodayCount"
+        ).textContent =
+            completedToday +
+            " completed today";
+
+    }
+
+
+    /* =========================
+       NORMAL NOTE
+    ========================= */
+
+    function newNote() {
+
+        currentNote =
+            null;
+
+
+        document.getElementById(
+            "titleInput"
+        ).value =
+            "";
+
+
+        document.getElementById(
+            "noteInput"
+        ).value =
+            "";
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "block";
+
+    }
+
+
+    function openNote(index) {
+
+        currentNote =
+            index;
+
+
+        const note =
+            notes[index];
+
+
+        document.getElementById(
+            "titleInput"
+        ).value =
+            note.title ||
+            "";
+
+
+        document.getElementById(
+            "noteInput"
+        ).value =
+            note.text ||
+            "";
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "block";
+
+    }
+
+
+    /* =========================
+       SAVE NOTE
+    ========================= */
+
+    function saveNote() {
+
+        const title =
+            document.getElementById(
+                "titleInput"
+            ).value.trim();
+
+
+        const text =
+            document.getElementById(
+                "noteInput"
+            ).value;
+
+
+        if (
+            title === "" &&
+            text.trim() === ""
+        ) {
+
+            alert(
+                "Write something first!"
+            );
+
+
+            return;
+
+        }
+
+
+        const date =
+            getDate();
+
+
+        const favorite =
+            currentNote !== null
+                ? notes[currentNote].favorite ||
+                  false
+                : false;
+
+
+        const noteData = {
+
+            type:
+                "note",
+
+            title:
+                title ||
+                "Untitled",
+
+            text:
+                text,
+
+            date:
+                date,
+
+            favorite:
+                favorite
+
+        };
+
+
+        if (
+            currentNote === null
+        ) {
+
+            notes.unshift(
+                noteData
+            );
+
+        }
+
+
+        else {
+
+            notes[currentNote] =
+                noteData;
+
+        }
+
+
+        localStorage.setItem(
+            "notes",
+            JSON.stringify(
+                notes
+            )
+        );
+
+
+        document.body.classList.add(
+            "page-turn"
+        );
+
+
+        setTimeout(
+            function() {
+
+                document.body.classList.remove(
+                    "page-turn"
+                );
+
+
+                goBack();
+
+            },
+            650
+        );
+
+    }
+
+
+    function deleteNote() {
+
+        if (
+            currentNote === null
+        ) {
+
+            goBack();
+
+            return;
+
+        }
+
+
+        if (
+            shouldConfirmDelete(
+                "Are you sure you want to delete this note?"
+            )
+        ) {
+
+            notes.splice(
+                currentNote,
+                1
+            );
+
+
+            localStorage.setItem(
+                "notes",
+                JSON.stringify(
+                    notes
+                )
+            );
+
+
+            goBack();
+
+        }
+
+    }
+
+
+    function goBack() {
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "block";
+
+
+        displayNotes();
+
+    }
+
+
+    /* =========================
+       TODO LIST
+    ========================= */
+
+    function addTodoItem(
+        text = "",
+        completed = false
+    ) {
+
+        todoItems.push({
+
+            text:
+                text,
+
+            completed:
+                completed,
+
+            completedDate:
+                completed
+                    ? getTodayKey()
+                    : null
+
+        });
+
+
+        renderTodoItems();
+
+    }
+
+
+    function renderTodoItems() {
+
+        const container =
+            document.getElementById(
+                "todoItems"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        todoItems.forEach(
+            function(item, index) {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "todo-item";
+
+
+                if (
+                    item.completed
+                ) {
+
+                    row.classList.add(
+                        "completed"
+                    );
+
+                }
+
+
+                const checkbox =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                checkbox.type =
+                    "checkbox";
+
+
+                checkbox.className =
+                    "todo-checkbox";
+
+
+                checkbox.checked =
+                    item.completed;
+
+
+                checkbox.onchange =
+                    function() {
+
+                        item.completed =
+                            checkbox.checked;
+
+
+                        if (
+                            checkbox.checked
+                        ) {
+
+                            item.completedDate =
+                                getTodayKey();
+
+                        }
+
+
+                        else {
+
+                            item.completedDate =
+                                null;
+
+                        }
+
+
+                        renderTodoItems();
+
+
+                        checkTodoCompletion();
+
+
+                        updateCompletedToday();
+
+                    };
+
+
+                const text =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                text.type =
+                    "text";
+
+
+                text.className =
+                    "todo-text";
+
+
+                text.value =
+                    item.text;
+
+
+                text.placeholder =
+                    "Task...";
+
+
+                text.oninput =
+                    function() {
+
+                        item.text =
+                            text.value;
+
+                    };
+
+
+                const remove =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                remove.className =
+                    "remove-todo";
+
+
+                remove.textContent =
+                    "×";
+
+
+                remove.onclick =
+                    function() {
+
+                        if (
+                            shouldConfirmDelete(
+                                "Are you sure you want to delete this task?"
+                            )
+                        ) {
+
+                            todoItems.splice(
+                                index,
+                                1
+                            );
+
+
+                            renderTodoItems();
+
+                        }
+
+                    };
+
+
+                row.appendChild(
+                    checkbox
+                );
+
+
+                row.appendChild(
+                    text
+                );
+
+
+                row.appendChild(
+                    remove
+                );
+
+
+                container.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        updateTodoCounter();
+
+    }
+
+
+    function updateTodoCounter() {
+
+        const total =
+            todoItems.length;
+
+
+        const completed =
+            todoItems.filter(
+                item =>
+                    item.completed
+            ).length;
+
+
+        document.getElementById(
+            "todoCounter"
+        ).textContent =
+            completed +
+            " / " +
+            total +
+            " completed";
+
+    }
+
+
+    function checkTodoCompletion() {
+
+        if (
+            todoItems.length > 0 &&
+            todoItems.every(
+                item =>
+                    item.completed
+            )
+        ) {
+
+            makeConfetti();
+
+        }
+
+    }
+
+
+    function makeConfetti() {
+
+        for (
+            let i = 0;
+            i < 80;
+            i++
+        ) {
+
+            const piece =
+                document.createElement(
+                    "div"
+                );
+
+
+            piece.className =
+                "confetti";
+
+
+            piece.style.left =
+                Math.random() * 100 +
+                "vw";
+
+
+            piece.style.animationDelay =
+                Math.random() * 0.7 +
+                "s";
+
+
+            piece.style.transform =
+                "rotate(" +
+                Math.random() * 360 +
+                "deg)";
+
+
+            document.body.appendChild(
+                piece
+            );
+
+
+            setTimeout(
+                function() {
+
+                    piece.remove();
+
+                },
+                3500
+            );
+
+        }
+
+    }
+
+
+    function saveTodo() {
+
+        const title =
+            document.getElementById(
+                "todoTitleInput"
+            ).value.trim();
+
+
+        if (
+            title === "" &&
+            todoItems.length === 0
+        ) {
+
+            alert(
+                "Add a title or task first!"
+            );
+
+
+            return;
+
+        }
+
+
+        const date =
+            getDate();
+
+
+        const favorite =
+            currentTodo !== null
+                ? notes[currentTodo].favorite ||
+                  false
+                : false;
+
+
+        const todoData = {
+
+            type:
+                "todo",
+
+            title:
+                title ||
+                "To-Do List",
+
+            items:
+                todoItems,
+
+            date:
+                date,
+
+            favorite:
+                favorite
+
+        };
+
+
+        if (
+            currentTodo === null
+        ) {
+
+            notes.unshift(
+                todoData
+            );
+
+        }
+
+
+        else {
+
+            notes[currentTodo] =
+                todoData;
+
+        }
+
+
+        localStorage.setItem(
+            "notes",
+            JSON.stringify(
+                notes
+            )
+        );
+
+
+        goBackFromTodo();
+
+    }
+
+
+    function openTodo(index) {
+
+        currentTodo =
+            index;
+
+
+        const todo =
+            notes[index];
+
+
+        document.getElementById(
+            "todoTitleInput"
+        ).value =
+            todo.title ||
+            "";
+
+
+        todoItems =
+            todo.items
+                ? JSON.parse(
+                    JSON.stringify(
+                        todo.items
+                    )
+                )
+                : [];
+
+
+        renderTodoItems();
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "editor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "block";
+
+    }
+
+
+    function deleteTodo() {
+
+        if (
+            currentTodo === null
+        ) {
+
+            goBackFromTodo();
+
+            return;
+
+        }
+
+
+        if (
+            shouldConfirmDelete(
+                "Are you sure you want to delete this list?"
+            )
+        ) {
+
+            notes.splice(
+                currentTodo,
+                1
+            );
+
+
+            localStorage.setItem(
+                "notes",
+                JSON.stringify(
+                    notes
+                )
+            );
+
+
+            goBackFromTodo();
+
+        }
+
+    }
+
+
+    function goBackFromTodo() {
+
+        document.getElementById(
+            "todoEditor"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "home"
+        ).style.display =
+            "block";
+
+
+        displayNotes();
+
+    }
+
+
+    /* =========================
+       DATE
+    ========================= */
+
+    function getDate() {
+
+        const today =
+            new Date();
+
+
+        return (
+
+            String(
+                today.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            )
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                today.getDate()
+            ).padStart(
+                2,
+                "0"
+            )
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                today.getFullYear()
+            ).slice(-2)
+
+        );
+
+    }
+
+
+    /* =========================
+       CLOSE CREATE MENU
+    ========================= */
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            const menu =
+                document.getElementById(
+                    "createMenu"
+                );
+
+
+            const button =
+                document.querySelector(
+                    ".add-button"
+                );
+
+
+            if (
+                !menu.contains(
+                    event.target
+                ) &&
+                event.target !== button
+            ) {
+
+                menu.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       START APP
+    ========================= */
+
+    displayNotes();
+
+    showWelcome();
+
+
+</script>
+
+</body>
+</html>
