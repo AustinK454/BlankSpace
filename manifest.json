@@ -1,21 +1,13 @@
 {
   "name": "Blank Space",
   "short_name": "Blank Space",
-  "id": "/BlankSpace/",
-  "start_url": "/BlankSpace/",
+  "start_url": "/BlankSpace/notes.html",
   "scope": "/BlankSpace/",
   "display": "standalone",
   "background_color": "#F4E8E6",
   "theme_color": "#B86F72",
   "description": "An all-in-one notepad app",
-  "orientation": "portrait-primary",
-  "lang": "en-US",
-  "dir": "ltr",
-  "categories": [
-    "productivity",
-    "utilities"
-  ],
- 
+  "icons": [
     {
       "src": "launchericon-192x192.png",
       "sizes": "192x192",
@@ -40,5 +32,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  
+  ]
 }
