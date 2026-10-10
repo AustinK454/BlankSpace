@@ -440,55 +440,122 @@
             }
         }
 
-        @media (max-width: 360px) {
-            .month-navigation {
-                gap: 5px;
-                padding-left: 6px;
-                padding-right: 6px;
-            }
+        @media (max-width: 600px) {
+    .topbar {
+        min-height: 65px;
+        padding: 10px 15px;
+    }
 
-            .month-arrow {
-                width: 31px;
-                height: 34px;
-            }
+    .page-title {
+        font-size: 24px;
+    }
 
-            .month-display-name {
-                font-size: 18px;
-            }
+    .year-section {
+        padding: 20px 10px 10px;
+    }
 
-            .month {
-                padding: 0 3px;
-            }
+    #year {
+        font-size: 25px;
+    }
 
-            .weekday {
-                font-size: 9px;
-            }
+    .month-navigation {
+        gap: 10px;
+        padding: 10px 12px 18px;
+    }
 
-            .day {
-                min-height: 69px;
-                padding: 2px;
-            }
+    .month-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 26px;
+    }
 
-            .empty {
-                min-height: 69px;
-            }
+    .month-display-name {
+        font-size: 25px;
+    }
 
-            .day-number {
-                min-width: 19px;
-                height: 19px;
-                font-size: 10px;
-            }
+    .month-display-year {
+        font-size: 13px;
+    }
 
-            .day textarea {
-                height: 38px;
-                font-size: 9px;
-                line-height: 12px;
-            }
+    .today-button {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
 
-            .clear-day {
-                font-size: 8px;
-            }
-        }
+    .month {
+        padding: 0 5px;
+        margin-bottom: 30px;
+    }
+
+    .month-title {
+        font-size: 29px;
+        margin-left: 5px;
+    }
+
+    .weekday {
+        padding: 12px 0;
+        font-size: 12px;
+    }
+
+    .day {
+        min-height: 125px;
+        padding: 5px;
+    }
+
+    .empty {
+        min-height: 125px;
+    }
+
+    .day-number {
+        min-width: 27px;
+        height: 27px;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .day textarea {
+        height: 75px;
+        padding: 2px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .clear-day {
+        font-size: 10px;
+        padding: 4px 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .month {
+        padding: 0 3px;
+    }
+
+    .weekday {
+        font-size: 10px;
+    }
+
+    .day {
+        min-height: 110px;
+        padding: 3px;
+    }
+
+    .empty {
+        min-height: 110px;
+    }
+
+    .day-number {
+        min-width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .day textarea {
+        height: 65px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
     </style>
 </head>
 
