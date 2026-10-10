@@ -3,23 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#593A3B">
+    <meta name="theme-color" content="#F4E8E6" id="themeColor">
     <title>Blank Space</title>
     <link rel="manifest" href="manifest.json">
 
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: light;
+
+            --background: #F4E8E6;
+            --card: #FFF9F7;
+            --text: #593A3B;
+            --muted: #806B6B;
+            --accent: #B86F72;
+            --rose: #D9A6A6;
+            --border: #D8C2C1;
+            --header: #593A3B;
+            --header-text: #FFF9F7;
+            --hover: #F4E8E6;
+            --completed: #A99797;
+            --shadow: #00000022;
+        }
+
+        body.dark-mode {
+            color-scheme: dark;
+
+            --background: #3A3536;
+            --card: #494041;
+            --text: #F4E8E6;
+            --muted: #C5B5B3;
+            --accent: #D9A6A6;
+            --rose: #B86F72;
+            --border: #625354;
+            --header: #302B2C;
+            --header-text: #F4E8E6;
+            --hover: #554849;
+            --completed: #B5A3A3;
+            --shadow: #00000033;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--background);
+        }
 
         body {
             margin: 0;
-            background: #F4E8E6;
-            color: #593A3B;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: var(--background);
+            color: var(--text);
             font-family: Arial, sans-serif;
+            transition: background-color 0.2s, color 0.2s;
         }
 
-        button, input, textarea { font-family: inherit; }
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
 
         /* WELCOME SCREEN */
+
         .welcome-popup {
             position: fixed;
             inset: 0;
@@ -27,7 +80,7 @@
             height: 100vh;
             height: 100dvh;
             min-height: 100vh;
-            background-color: #F4E8E6;
+            background-color: var(--background);
             background-image: repeating-linear-gradient(
                 to bottom,
                 transparent 0,
@@ -55,22 +108,16 @@
         .welcome-brand {
             font-size: 26px;
             font-weight: bold;
-            color: #593A3B;
+            color: var(--text);
         }
 
         .welcome-screen {
-            background-color: #F4E8E6;
-            background-image: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 39px,
-                rgba(180, 95, 99, 0.7) 40px
-            );
+            background-color: var(--background);
         }
 
         .welcome-bubble {
-            background: #FFF9F7;
-            border: 1px solid #D8C2C1;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 18px;
             width: min(290px, 88vw);
             min-height: 145px;
@@ -80,7 +127,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 10px 30px #593A3B33;
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .welcome-icon {
@@ -90,13 +137,13 @@
 
         .welcome-popup h2 {
             margin: 0 0 6px;
-            color: #593A3B;
+            color: var(--text);
             font-size: 20px;
         }
 
         .welcome-popup p {
             margin: 0;
-            color: #806B6B;
+            color: var(--muted);
             font-size: 14px;
             line-height: 1.4;
         }
@@ -119,10 +166,11 @@
         }
 
         /* TOP BAR */
+
         .topbar {
             min-height: 60px;
-            background: #593A3B;
-            color: #FFF9F7;
+            background: var(--header);
+            color: var(--header-text);
             display: flex;
             align-items: center;
             padding: 0 15px;
@@ -143,11 +191,12 @@
         }
 
         /* BLANK SPACE LOGO */
+
         .blank-space-logo {
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #FFF9F7;
+            color: var(--header-text);
             font-size: 17px;
             font-weight: bold;
             white-space: nowrap;
@@ -160,23 +209,23 @@
             width: 92px;
             height: 34px;
             padding: 0 7px;
-            background: #D9A6A6;
-            border: 2px solid #B86F72;
+            background: var(--rose);
+            border: 2px solid var(--accent);
             border-radius: 8px;
-            box-shadow:
-                0 3px 0 #9F5D61,
-                0 5px 8px #00000022;
-            color: #593A3B;
+            box-shadow: 0 3px 0 var(--accent), 0 5px 8px var(--shadow);
+            color: var(--text);
             font-size: 16px;
             font-weight: bold;
             text-align: center;
             flex-shrink: 0;
         }
 
-        .spacebar-logo span { line-height: 1; }
+        .spacebar-logo span {
+            line-height: 1;
+        }
 
         .welcome-logo {
-            color: #593A3B;
+            color: var(--text);
             justify-content: center;
             font-size: 21px;
         }
@@ -187,8 +236,10 @@
         }
 
         /* SORT BAR */
+
         .sortbar {
-            background: #D9A6A6;
+            background: var(--rose);
+            color: var(--text);
             padding: 10px 12px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -196,10 +247,12 @@
             gap: 4px;
             font-size: 17px;
             font-weight: bold;
-            border-bottom: 3px solid #B86F72;
+            border-bottom: 3px solid var(--accent);
         }
 
-        .sortbar-left { text-align: left; }
+        .sortbar-left {
+            text-align: left;
+        }
 
         .sortbar-center {
             text-align: center;
@@ -207,9 +260,12 @@
             white-space: nowrap;
         }
 
-        .sortbar-right { text-align: right; }
+        .sortbar-right {
+            text-align: right;
+        }
 
         /* HOME REVEAL ANIMATION */
+
         #home {
             opacity: 0;
             transform: translateY(12px);
@@ -231,8 +287,9 @@
         }
 
         /* NOTES */
+
         #notes {
-            background: #FFF9F7;
+            background: var(--card);
             min-height: calc(100vh - 115px);
             min-height: calc(100dvh - 115px);
             position: relative;
@@ -240,6 +297,7 @@
         }
 
         /* NOTEBOOK BINDING */
+
         #notes::before {
             content: "";
             position: absolute;
@@ -267,19 +325,21 @@
             align-items: center;
             min-width: 0;
             padding: 12px 9px;
-            border-bottom: 1px solid #D8C2C1;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
             gap: 0;
         }
 
-        .note:hover { background: #F4E8E6; }
+        .note:hover {
+            background: var(--hover);
+        }
 
         .note-icon {
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: #B86F72;
-            color: white;
+            background: var(--accent);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -296,6 +356,7 @@
         .note-title {
             font-size: 16px;
             font-weight: bold;
+            color: var(--text);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -303,7 +364,7 @@
 
         .note-preview {
             margin-top: 4px;
-            color: #806B6B;
+            color: var(--muted);
             font-size: 13px;
             white-space: nowrap;
             overflow: hidden;
@@ -315,22 +376,28 @@
             font-size: 12px;
             font-weight: bold;
             font-style: italic;
+            color: var(--text);
         }
 
         /* FAVORITE STAR */
+
         .favorite-button {
             font-size: 23px;
             padding: 5px;
-            color: #593A3B;
+            color: var(--text);
             cursor: pointer;
             line-height: 1;
             transition: transform 0.2s;
             flex-shrink: 0;
         }
 
-        .favorite-button.favorite { color: #D4A72C; }
+        .favorite-button.favorite {
+            color: #D4A72C;
+        }
 
-        .favorite-button:hover { transform: scale(1.15); }
+        .favorite-button:hover {
+            transform: scale(1.15);
+        }
 
         .favorite-button.favorite-pop {
             animation: favoritePop 0.2s ease;
@@ -343,15 +410,17 @@
         }
 
         /* DELETE BUTTON */
+
         .delete-button {
             font-size: 20px;
             padding: 5px;
-            color: #593A3B;
+            color: var(--text);
             cursor: pointer;
             flex-shrink: 0;
         }
 
         /* ADD BUTTON */
+
         .add-button {
             position: fixed;
             right: 16px;
@@ -360,30 +429,32 @@
             height: 53px;
             border-radius: 50%;
             border: none;
-            background: #B86F72;
-            color: white;
+            background: var(--accent);
+            color: #FFFFFF;
             font-size: 32px;
             cursor: pointer;
-            box-shadow: 0 4px 10px #00000055;
+            box-shadow: 0 4px 10px var(--shadow);
             transition: transform 0.2s;
             z-index: 400;
         }
 
         .add-button:hover {
-            background: #9F5D61;
             transform: scale(1.08);
         }
 
         /* CREATE MENU */
+
         .create-menu {
             position: fixed;
             right: 16px;
             bottom: 78px;
             width: 190px;
             max-width: calc(100vw - 32px);
-            background: #FFF9F7;
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            box-shadow: 0 5px 20px #00000033;
+            box-shadow: 0 5px 20px var(--shadow);
             padding: 8px;
             display: none;
             z-index: 500;
@@ -411,28 +482,36 @@
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
+            color: var(--text);
         }
 
-        .create-option:hover { background: #F4E8E6; }
+        .create-option:hover {
+            background: var(--hover);
+        }
 
         /* NOTE EDITOR */
+
         #editor {
             display: none;
             min-height: 100vh;
             min-height: 100dvh;
-            background: #FFF9F7;
+            background: var(--card);
+            color: var(--text);
         }
 
         .editor-top {
-            background: #593A3B;
-            color: #FFF9F7;
+            background: var(--header);
+            color: var(--header-text);
             padding: 12px 14px;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .back { font-size: 25px; cursor: pointer; }
+        .back {
+            font-size: 25px;
+            cursor: pointer;
+        }
 
         .editor-title {
             flex: 1;
@@ -440,10 +519,11 @@
             font-weight: bold;
         }
 
-        .save {
-            background: #B86F72;
+        .save,
+        .todo-save {
+            background: var(--accent);
             border: none;
-            color: white;
+            color: #FFFFFF;
             padding: 8px 13px;
             border-radius: 7px;
             font-size: 14px;
@@ -451,17 +531,19 @@
             cursor: pointer;
         }
 
-        .editor-content { padding: 16px; }
+        .editor-content {
+            padding: 16px;
+        }
 
         #titleInput {
             width: 100%;
             min-width: 0;
             border: none;
-            border-bottom: 2px solid #B86F72;
+            border-bottom: 2px solid var(--accent);
             background: transparent;
             font-size: 23px;
             font-weight: bold;
-            color: #593A3B;
+            color: var(--text);
             padding: 9px 0;
             outline: none;
         }
@@ -477,12 +559,23 @@
             background: transparent;
             font-family: Arial, sans-serif;
             font-size: 18px;
-            color: #593A3B;
+            color: var(--text);
             line-height: 1.5;
         }
 
+        #titleInput::placeholder,
+        #noteInput::placeholder,
+        #todoTitleInput::placeholder,
+        .todo-text::placeholder {
+            color: var(--muted);
+            opacity: 1;
+        }
+
         /* PAGE TURN */
-        body.page-turn { overflow: hidden; }
+
+        body.page-turn {
+            overflow: hidden;
+        }
 
         body.page-turn #editor {
             display: block !important;
@@ -502,9 +595,10 @@
             }
         }
 
-        .delete-note {
-            background: #B86F72;
-            color: white;
+        .delete-note,
+        .delete-todo-list {
+            background: var(--accent);
+            color: #FFFFFF;
             border: none;
             padding: 10px 16px;
             border-radius: 7px;
@@ -514,23 +608,28 @@
         }
 
         /* TODO EDITOR */
+
         #todoEditor {
             display: none;
             min-height: 100vh;
             min-height: 100dvh;
-            background: #FFF9F7;
+            background: var(--card);
+            color: var(--text);
         }
 
         .todo-top {
-            background: #593A3B;
-            color: #FFF9F7;
+            background: var(--header);
+            color: var(--header-text);
             padding: 12px 14px;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .todo-back { font-size: 25px; cursor: pointer; }
+        .todo-back {
+            font-size: 25px;
+            cursor: pointer;
+        }
 
         .todo-title {
             flex: 1;
@@ -538,53 +637,46 @@
             font-weight: bold;
         }
 
-        .todo-save {
-            background: #B86F72;
-            border: none;
-            color: white;
-            padding: 8px 13px;
-            border-radius: 7px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
+        .todo-content {
+            padding: 16px;
         }
-
-        .todo-content { padding: 16px; }
 
         #todoTitleInput {
             width: 100%;
             border: none;
-            border-bottom: 2px solid #B86F72;
+            border-bottom: 2px solid var(--accent);
             background: transparent;
             font-size: 23px;
             font-weight: bold;
-            color: #593A3B;
+            color: var(--text);
             padding: 9px 0;
             outline: none;
         }
 
         .todo-counter {
             margin-top: 12px;
-            color: #806B6B;
+            color: var(--muted);
             font-size: 14px;
             font-weight: bold;
         }
 
-        #todoItems { margin-top: 18px; }
+        #todoItems {
+            margin-top: 18px;
+        }
 
         .todo-item {
             display: flex;
             align-items: center;
             gap: 9px;
             padding: 10px 3px;
-            border-bottom: 1px solid #D8C2C1;
+            border-bottom: 1px solid var(--border);
         }
 
         .todo-checkbox {
             width: 21px;
             height: 21px;
             cursor: pointer;
-            accent-color: #B86F72;
+            accent-color: var(--accent);
             flex-shrink: 0;
         }
 
@@ -596,24 +688,24 @@
             transition: color 0.3s;
             border: none;
             background: transparent;
-            color: #593A3B;
+            color: var(--text);
         }
 
         .todo-item.completed .todo-text {
             text-decoration: line-through;
-            color: #A99797;
+            color: var(--completed);
             animation: strike 0.3s ease;
         }
 
         @keyframes strike {
             from { text-decoration-color: transparent; }
-            to { text-decoration-color: #A99797; }
+            to { text-decoration-color: var(--completed); }
         }
 
         .remove-todo {
             border: none;
             background: transparent;
-            color: #B86F72;
+            color: var(--accent);
             font-size: 21px;
             cursor: pointer;
             flex-shrink: 0;
@@ -621,8 +713,8 @@
 
         .add-task {
             margin-top: 17px;
-            background: #D9A6A6;
-            color: #593A3B;
+            background: var(--rose);
+            color: var(--text);
             border: none;
             padding: 10px 14px;
             border-radius: 8px;
@@ -631,32 +723,26 @@
             cursor: pointer;
         }
 
-        .delete-todo-list {
-            margin-top: 25px;
-            background: #B86F72;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 7px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
         /* CONFETTI */
+
         .confetti {
             position: fixed;
             top: -12px;
             width: 8px;
             height: 12px;
-            background: #B86F72;
+            background: var(--accent);
             z-index: 10001;
             pointer-events: none;
             animation: confettiFall 3s ease-in forwards;
         }
 
-        .confetti:nth-child(3n) { background: #D9A6A6; }
-        .confetti:nth-child(3n + 1) { background: #D4A72C; }
+        .confetti:nth-child(3n) {
+            background: var(--rose);
+        }
+
+        .confetti:nth-child(3n + 1) {
+            background: #D4A72C;
+        }
 
         @keyframes confettiFall {
             to {
@@ -666,6 +752,7 @@
         }
 
         /* SIDE NAVIGATION */
+
         .side-menu {
             position: fixed;
             top: 0;
@@ -675,18 +762,21 @@
             height: 100vh;
             height: 100dvh;
             overflow-y: auto;
-            background: #FFF9F7;
+            background: var(--card);
+            color: var(--text);
             z-index: 1000;
-            box-shadow: 5px 0 15px #00000033;
+            box-shadow: 5px 0 15px var(--shadow);
             transition: left 0.3s ease;
         }
 
-        .side-menu.open { left: 0; }
+        .side-menu.open {
+            left: 0;
+        }
 
         .menu-header {
             min-height: 78px;
-            background: #593A3B;
-            color: #D9A6A6;
+            background: var(--header);
+            color: var(--rose);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -694,20 +784,31 @@
             font-family: Arial, sans-serif;
         }
 
-        .menu-title { font-size: 19px; font-weight: bold; }
-        .close-menu { font-size: 29px; cursor: pointer; }
+        .menu-title {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .close-menu {
+            font-size: 29px;
+            cursor: pointer;
+        }
 
         .menu-item {
             padding: 15px;
             font-size: 16px;
             font-weight: bold;
-            border-bottom: 1px solid #D8C2C1;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
         }
 
-        .menu-item:hover { background: #F4E8E6; }
+        .menu-item:hover {
+            background: var(--hover);
+        }
 
         /* OVERLAY */
+
         .overlay {
             position: fixed;
             inset: 0;
@@ -718,208 +819,93 @@
             display: none;
         }
 
-        .overlay.show { display: block; }
-
-        /* DARK MODE — MATCHES SETTINGS */
-        :root { color-scheme: light; }
-
-        body.dark-mode {
-            color-scheme: dark;
-            background: #3A3536;
-            color: #F4E8E6;
+        .overlay.show {
+            display: block;
         }
-
-        body.dark-mode .topbar {
-            background: #593A3B;
-            color: #F4E8E6;
-        }
-
-        body.dark-mode .blank-space-logo { color: #F4E8E6; }
-
-        body.dark-mode .sortbar {
-            background: #494041;
-            color: #F4E8E6;
-            border-bottom-color: #B86F72;
-        }
-
-        body.dark-mode #notes { background: #494041; }
-        body.dark-mode #notes::before { opacity: 0.4; }
-        body.dark-mode .note { border-bottom-color: #625354; }
-        body.dark-mode .note:hover { background: #554849; }
-        body.dark-mode .note-title { color: #F4E8E6; }
-        body.dark-mode .note-preview { color: #C5B5B3; }
-        body.dark-mode .note-date { color: #F4E8E6; }
-        body.dark-mode .favorite-button { color: #F4E8E6; }
-        body.dark-mode .favorite-button.favorite { color: #D4A72C; }
-        body.dark-mode .delete-button { color: #F4E8E6; }
-
-        body.dark-mode .create-menu {
-            background: #494041;
-            border: 1px solid #625354;
-        }
-
-        body.dark-mode .create-option { color: #F4E8E6; }
-        body.dark-mode .create-option:hover { background: #554849; }
-
-        body.dark-mode #editor,
-        body.dark-mode #todoEditor {
-            background: #3A3536;
-        }
-
-        body.dark-mode .editor-top,
-        body.dark-mode .todo-top {
-            background: #593A3B;
-            color: #F4E8E6;
-        }
-
-        body.dark-mode .editor-title,
-        body.dark-mode .todo-title { color: #F4E8E6; }
-
-        body.dark-mode #titleInput,
-        body.dark-mode #noteInput,
-        body.dark-mode #todoTitleInput,
-        body.dark-mode .todo-text { color: #F4E8E6; }
-
-        body.dark-mode #titleInput::placeholder,
-        body.dark-mode #noteInput::placeholder,
-        body.dark-mode #todoTitleInput::placeholder,
-        body.dark-mode .todo-text::placeholder { color: #C5B5B3; }
-
-        body.dark-mode .todo-counter { color: #C5B5B3; }
-        body.dark-mode .todo-item { border-bottom-color: #625354; }
-
-        body.dark-mode .todo-item.completed .todo-text {
-            color: #B8A7A6;
-        }
-
-        body.dark-mode .side-menu { background: #494041; }
-
-        body.dark-mode .menu-header {
-            background: #593A3B;
-            color: #D9A6A6;
-        }
-
-        body.dark-mode .menu-item {
-            color: #F4E8E6;
-            border-bottom-color: #625354;
-        }
-
-        body.dark-mode .menu-item:hover { background: #554849; }
-
-        body.dark-mode .welcome-popup {
-            background-color: #3A3536;
-            background-image: repeating-linear-gradient(
-                to bottom,
-                transparent 0,
-                transparent 39px,
-                rgba(217, 166, 166, 0.3) 40px
-            );
-        }
-
-        body.dark-mode .welcome-brand { color: #F4E8E6; }
-
-        body.dark-mode .welcome-bubble {
-            background: #494041;
-            border-color: #625354;
-            box-shadow: 0 10px 30px #00000033;
-        }
-
-        body.dark-mode .welcome-popup h2 { color: #F4E8E6; }
-        body.dark-mode .welcome-popup p { color: #C5B5B3; }
-
-        body.dark-mode .spacebar-logo {
-            background: #B86F72;
-            border-color: #D9A6A6;
-            box-shadow: 0 3px 0 #854D50, 0 5px 8px #00000033;
-            color: #FFF9F7;
-        }
-
-        body.dark-mode .welcome-logo .spacebar-logo {
-            background: #B86F72;
-            color: #FFF9F7;
-        }
-
-        body.dark-mode .add-task {
-            background: #D9A6A6;
-            color: #593A3B;
-        }
-
-        body.dark-mode .delete-note,
-        body.dark-mode .delete-todo-list,
-        body.dark-mode .save,
-        body.dark-mode .todo-save {
-            background: #B86F72;
-            color: #FFFFFF;
-        }
-
-        body.dark-mode .add-button {
-            background: #B86F72;
-            color: #FFFFFF;
-        }
-
-        body.dark-mode .add-button:hover {
-            background: #D9A6A6;
-            color: #593A3B;
-        }
-
-        body.dark-mode .todo-checkbox { accent-color: #D9A6A6; }
 
         /* MOBILE LAYOUT */
+
         @media (max-width: 480px) {
             .topbar {
                 min-height: 54px;
-                padding: 0 10px;
+                padding: 0 11px;
                 gap: 10px;
             }
 
-            .menu { font-size: 22px; }
-            .blank-space-logo { font-size: 15px; gap: 4px; }
+            .sortbar {
+                padding: 9px 8px;
+                font-size: 15px;
+            }
+
+            .sortbar-center {
+                font-size: 11px;
+            }
+
+            .note {
+                padding: 10px 7px;
+            }
+
+            .note-icon {
+                width: 38px;
+                height: 38px;
+                margin-right: 8px;
+                font-size: 18px;
+            }
+
+            .editor-content,
+            .todo-content {
+                padding: 13px;
+            }
+
+            #titleInput,
+            #todoTitleInput {
+                font-size: 21px;
+            }
+
+            #noteInput,
+            .todo-text {
+                font-size: 16px;
+            }
+
+            .add-button {
+                width: 49px;
+                height: 49px;
+                right: 13px;
+                bottom: 13px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .blank-space-logo {
+                font-size: 15px;
+                gap: 4px;
+            }
 
             .spacebar-logo {
-                width: 78px;
-                height: 30px;
-                padding: 0 4px;
+                width: 77px;
+                height: 31px;
                 font-size: 14px;
+                padding: 0 4px;
             }
 
             .sortbar {
-                padding: 8px;
+                padding: 9px 7px;
                 font-size: 14px;
-                border-bottom-width: 2px;
             }
 
-            .sortbar-center { font-size: 10px; }
-
-            #notes {
-                padding-left: 15px;
-                min-height: calc(100dvh - 100px);
+            .sortbar-center {
+                font-size: 10px;
             }
-
-            #notes::before {
-                left: 2px;
-                width: 10px;
-                background-size: 10px 32px;
-            }
-
-            .note { padding: 9px 5px; }
 
             .note-icon {
                 width: 34px;
                 height: 34px;
-                margin-right: 7px;
+                margin-right: 6px;
                 font-size: 16px;
             }
 
-            .note-title { font-size: 14px; }
-
-            .note-preview {
-                font-size: 12px;
-                margin-top: 3px;
-            }
-
-            .note-date {
-                font-size: 11px;
-                margin-top: 3px;
+            .note-title {
+                font-size: 14px;
             }
 
             .favorite-button {
@@ -931,114 +917,67 @@
                 font-size: 18px;
                 padding: 4px;
             }
-
-            .add-button {
-                width: 48px;
-                height: 48px;
-                right: 13px;
-                bottom: 13px;
-                font-size: 29px;
-            }
-
-            .create-menu {
-                right: 13px;
-                bottom: 70px;
-                width: 175px;
-            }
-
-            .create-option {
-                padding: 10px;
-                font-size: 14px;
-            }
-
-            .editor-top,
-            .todo-top {
-                padding: 10px;
-                gap: 9px;
-            }
-
-            .editor-title,
-            .todo-title { font-size: 16px; }
-
-            .editor-content,
-            .todo-content { padding: 12px; }
-
-            #titleInput,
-            #todoTitleInput { font-size: 19px; }
-
-            #noteInput {
-                font-size: 16px;
-                height: 58dvh;
-            }
-
-            .todo-text { font-size: 15px; }
-
-            .todo-checkbox {
-                width: 19px;
-                height: 19px;
-            }
-
-            .welcome-brand { font-size: 22px; }
-            .welcome-logo { font-size: 18px; }
-
-            .welcome-logo .spacebar-logo {
-                width: 94px;
-                height: 33px;
-            }
-
-            .welcome-bubble {
-                width: min(270px, 88vw);
-                min-height: 130px;
-                padding: 14px;
-            }
-
-            .welcome-popup h2 { font-size: 18px; }
-            .welcome-popup p { font-size: 13px; }
         }
 
-        @media (max-width: 360px) {
-            .topbar {
-                padding: 0 8px;
-                gap: 7px;
-            }
+        /* LIGHT MODE SAFETY OVERRIDES */
 
-            .blank-space-logo {
-                font-size: 13px;
-                gap: 3px;
-            }
+        body:not(.dark-mode) {
+            background: #F4E8E6;
+            color: #593A3B;
+        }
 
-            .spacebar-logo {
-                width: 70px;
-                height: 28px;
-                font-size: 13px;
-            }
+        body:not(.dark-mode) #home,
+        body:not(.dark-mode) #notes,
+        body:not(.dark-mode) #editor,
+        body:not(.dark-mode) #todoEditor {
+            color: #593A3B;
+        }
 
-            .sortbar {
-                padding: 7px 5px;
-                font-size: 12px;
-            }
+        body:not(.dark-mode) #notes,
+        body:not(.dark-mode) #editor,
+        body:not(.dark-mode) #todoEditor,
+        body:not(.dark-mode) .side-menu,
+        body:not(.dark-mode) .create-menu {
+            background-color: #FFF9F7;
+        }
 
-            .sortbar-center { font-size: 9px; }
-            .note { padding: 8px 3px; }
+        body:not(.dark-mode) .topbar,
+        body:not(.dark-mode) .editor-top,
+        body:not(.dark-mode) .todo-top,
+        body:not(.dark-mode) .menu-header {
+            background-color: #593A3B;
+        }
 
-            .note-icon {
-                width: 30px;
-                height: 30px;
-                margin-right: 6px;
-                font-size: 15px;
-            }
+        body:not(.dark-mode) .sortbar {
+            background-color: #D9A6A6;
+            color: #593A3B;
+        }
 
-            .note-title { font-size: 13px; }
+        body:not(.dark-mode) .note-title,
+        body:not(.dark-mode) .note-date,
+        body:not(.dark-mode) .favorite-button,
+        body:not(.dark-mode) .delete-button,
+        body:not(.dark-mode) .menu-item,
+        body:not(.dark-mode) .create-option,
+        body:not(.dark-mode) #titleInput,
+        body:not(.dark-mode) #noteInput,
+        body:not(.dark-mode) #todoTitleInput,
+        body:not(.dark-mode) .todo-text {
+            color: #593A3B;
+        }
 
-            .favorite-button {
-                font-size: 18px;
-                padding: 3px;
-            }
+        body:not(.dark-mode) .note-preview,
+        body:not(.dark-mode) .todo-counter {
+            color: #806B6B;
+        }
 
-            .delete-button {
-                font-size: 17px;
-                padding: 3px;
-            }
+        body:not(.dark-mode) .welcome-popup {
+            background-color: #F4E8E6;
+        }
+
+        body:not(.dark-mode) .welcome-bubble {
+            background-color: #FFF9F7;
+            border-color: #D8C2C1;
         }
     </style>
 </head>
@@ -1046,12 +985,15 @@
 <body>
 
 <!-- WELCOME SCREEN -->
+
 <div class="welcome-popup" id="welcomePopup">
     <div class="welcome-container">
         <div class="welcome-brand">
             <div class="blank-space-logo welcome-logo">
                 <span>Blank</span>
-                <div class="spacebar-logo"><span>Space</span></div>
+                <div class="spacebar-logo">
+                    <span>Space</span>
+                </div>
             </div>
         </div>
 
@@ -1064,6 +1006,7 @@
 </div>
 
 <!-- SIDE MENU -->
+
 <div class="side-menu" id="sideMenu">
     <div class="menu-header">
         <div class="menu-title">BLANK SPACE</div>
@@ -1082,6 +1025,7 @@
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <!-- HOME -->
+
 <div id="home">
     <div class="topbar">
         <div class="menu" onclick="openMenu()">☰</div>
@@ -1089,7 +1033,9 @@
         <div class="app-name">
             <div class="blank-space-logo">
                 <span>Blank</span>
-                <div class="spacebar-logo"><span>Space</span></div>
+                <div class="spacebar-logo">
+                    <span>Space</span>
+                </div>
             </div>
         </div>
     </div>
@@ -1113,6 +1059,7 @@
 </div>
 
 <!-- NOTE EDITOR -->
+
 <div id="editor">
     <div class="editor-top">
         <div class="back" onclick="goBack()">←</div>
@@ -1128,6 +1075,7 @@
 </div>
 
 <!-- TODO EDITOR -->
+
 <div id="todoEditor">
     <div class="todo-top">
         <div class="todo-back" onclick="goBackFromTodo()">←</div>
@@ -1137,8 +1085,11 @@
 
     <div class="todo-content">
         <input type="text" id="todoTitleInput" placeholder="List title...">
+
         <div class="todo-counter" id="todoCounter">0 / 0 completed</div>
+
         <div id="todoItems"></div>
+
         <button class="add-task" onclick="addTodoItem()">+ Add Task</button>
         <br>
         <button class="delete-todo-list" onclick="deleteTodo()">Delete List</button>
@@ -1146,11 +1097,30 @@
 </div>
 
 <script>
-    /* LOAD SAVED THEME */
-    const savedDarkMode = localStorage.getItem("darkMode") === "true";
-    document.body.classList.toggle("dark-mode", savedDarkMode);
+    /* THEME
+       Uses the same localStorage key as Settings.html.
+       Light mode is the default when no preference is saved. */
+
+    function applyTheme() {
+        const savedTheme = localStorage.getItem("darkMode");
+        const isDark = savedTheme === "true";
+
+        document.body.classList.toggle("dark-mode", isDark);
+
+        const themeColor = document.getElementById("themeColor");
+
+        if (themeColor) {
+            themeColor.setAttribute(
+                "content",
+                isDark ? "#3A3536" : "#F4E8E6"
+            );
+        }
+    }
+
+    applyTheme();
 
     /* DELETE CONFIRMATION */
+
     function shouldConfirmDelete(message) {
         return localStorage.getItem("deleteConfirmation") !== "false"
             ? confirm(message)
@@ -1158,12 +1128,22 @@
     }
 
     /* DATA */
-    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    let notes = [];
+
+    try {
+        const savedNotes = JSON.parse(localStorage.getItem("notes"));
+        notes = Array.isArray(savedNotes) ? savedNotes : [];
+    } catch (error) {
+        notes = [];
+    }
+
     let currentNote = null;
     let currentTodo = null;
     let todoItems = [];
 
     /* WELCOME SCREEN */
+
     function showWelcome() {
         const hour = new Date().getHours();
 
@@ -1200,6 +1180,7 @@
 
             setTimeout(function() {
                 popup.remove();
+
                 const home = document.getElementById("home");
                 home.classList.add("show-home");
             }, 400);
@@ -1207,6 +1188,7 @@
     }
 
     /* SIDE MENU */
+
     function openMenu() {
         document.getElementById("sideMenu").classList.add("open");
         document.getElementById("overlay").classList.add("show");
@@ -1218,6 +1200,7 @@
     }
 
     /* NAVIGATION */
+
     function goToNotes() {
         closeMenu();
 
@@ -1253,7 +1236,6 @@
         window.location.href = "Settings.html";
     }
 
-    /* HELP & SUPPORT */
     function contactSupport() {
         closeMenu();
 
@@ -1263,6 +1245,7 @@
     }
 
     /* CREATE MENU */
+
     function toggleCreateMenu() {
         document.getElementById("createMenu").classList.toggle("show");
     }
@@ -1288,22 +1271,23 @@
     }
 
     /* SHOW NOTES */
+
     function displayNotes() {
         const notesContainer = document.getElementById("notes");
         notesContainer.innerHTML = "";
 
         if (notes.length === 0) {
-            notesContainer.innerHTML = `
-                <div style="
-                    text-align:center;
-                    padding:45px 15px;
-                    color:#806B6B;
-                    font-size:16px;
-                ">
-                    No notes yet.<br><br>
-                    Tap + to create your first note.
-                </div>
-            `;
+            const emptyMessage = document.createElement("div");
+
+            emptyMessage.style.textAlign = "center";
+            emptyMessage.style.padding = "45px 15px";
+            emptyMessage.style.color = "var(--muted)";
+            emptyMessage.style.fontSize = "16px";
+
+            emptyMessage.innerHTML =
+                "No notes yet.<br><br>Tap + to create your first note.";
+
+            notesContainer.appendChild(emptyMessage);
 
             updateCompletedToday();
             return;
@@ -1336,12 +1320,11 @@
             preview.className = "note-preview";
 
             if (note.type === "todo") {
-                const completed = note.items
-                    ? note.items.filter(item => item.completed).length
-                    : 0;
+                const items = Array.isArray(note.items) ? note.items : [];
+                const completed = items.filter(item => item.completed).length;
 
-                const total = note.items ? note.items.length : 0;
-                preview.textContent = completed + " / " + total + " completed";
+                preview.textContent =
+                    completed + " / " + items.length + " completed";
             } else {
                 preview.textContent = note.text || "No text";
             }
@@ -1371,9 +1354,7 @@
 
                 favoriteButton.classList.add("favorite-pop");
 
-                setTimeout(function() {
-                    displayNotes();
-                }, 200);
+                setTimeout(displayNotes, 200);
             };
 
             const deleteButton = document.createElement("div");
@@ -1411,6 +1392,7 @@
     }
 
     /* COMPLETED TODAY */
+
     function getTodayKey() {
         const today = new Date();
 
@@ -1428,7 +1410,7 @@
         let completedToday = 0;
 
         notes.forEach(function(note) {
-            if (note.type === "todo" && note.items) {
+            if (note.type === "todo" && Array.isArray(note.items)) {
                 note.items.forEach(function(item) {
                     if (item.completed && item.completedDate === today) {
                         completedToday++;
@@ -1442,6 +1424,7 @@
     }
 
     /* NORMAL NOTE */
+
     function newNote() {
         currentNote = null;
 
@@ -1466,6 +1449,7 @@
     }
 
     /* SAVE NOTE */
+
     function saveNote() {
         const title = document.getElementById("titleInput").value.trim();
         const text = document.getElementById("noteInput").value;
@@ -1519,12 +1503,15 @@
     }
 
     function goBack() {
+        document.body.classList.remove("page-turn");
         document.getElementById("editor").style.display = "none";
+        document.getElementById("todoEditor").style.display = "none";
         document.getElementById("home").style.display = "block";
         displayNotes();
     }
 
     /* TODO LIST */
+
     function addTodoItem(text = "", completed = false) {
         todoItems.push({
             text: text,
@@ -1671,7 +1658,7 @@
 
         document.getElementById("todoTitleInput").value = todo.title || "";
 
-        todoItems = todo.items
+        todoItems = Array.isArray(todo.items)
             ? JSON.parse(JSON.stringify(todo.items))
             : [];
 
@@ -1697,11 +1684,13 @@
 
     function goBackFromTodo() {
         document.getElementById("todoEditor").style.display = "none";
+        document.getElementById("editor").style.display = "none";
         document.getElementById("home").style.display = "block";
         displayNotes();
     }
 
     /* DATE */
+
     function getDate() {
         const today = new Date();
 
@@ -1715,6 +1704,7 @@
     }
 
     /* CLOSE CREATE MENU */
+
     document.addEventListener("click", function(event) {
         const menu = document.getElementById("createMenu");
         const button = document.querySelector(".add-button");
@@ -1728,6 +1718,7 @@
     });
 
     /* START APP */
+
     displayNotes();
     showWelcome();
 </script>
