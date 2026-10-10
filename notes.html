@@ -8,9 +8,7 @@
     <link rel="manifest" href="manifest.json">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -19,14 +17,9 @@
             font-family: Arial, sans-serif;
         }
 
-        button,
-        input,
-        textarea {
-            font-family: inherit;
-        }
+        button, input, textarea { font-family: inherit; }
 
         /* WELCOME SCREEN */
-
         .welcome-popup {
             position: fixed;
             inset: 0;
@@ -113,20 +106,12 @@
         }
 
         @keyframes welcomeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes welcomeOut {
-            from {
-                opacity: 1;
-            }
-
+            from { opacity: 1; }
             to {
                 opacity: 0;
                 visibility: hidden;
@@ -134,7 +119,6 @@
         }
 
         /* TOP BAR */
-
         .topbar {
             min-height: 60px;
             background: #593A3B;
@@ -159,7 +143,6 @@
         }
 
         /* BLANK SPACE LOGO */
-
         .blank-space-logo {
             display: flex;
             align-items: center;
@@ -190,9 +173,7 @@
             flex-shrink: 0;
         }
 
-        .spacebar-logo span {
-            line-height: 1;
-        }
+        .spacebar-logo span { line-height: 1; }
 
         .welcome-logo {
             color: #593A3B;
@@ -206,7 +187,6 @@
         }
 
         /* SORT BAR */
-
         .sortbar {
             background: #D9A6A6;
             padding: 10px 12px;
@@ -219,9 +199,7 @@
             border-bottom: 3px solid #B86F72;
         }
 
-        .sortbar-left {
-            text-align: left;
-        }
+        .sortbar-left { text-align: left; }
 
         .sortbar-center {
             text-align: center;
@@ -229,12 +207,9 @@
             white-space: nowrap;
         }
 
-        .sortbar-right {
-            text-align: right;
-        }
+        .sortbar-right { text-align: right; }
 
         /* HOME REVEAL ANIMATION */
-
         #home {
             opacity: 0;
             transform: translateY(12px);
@@ -249,7 +224,6 @@
                 opacity: 0;
                 transform: translateY(12px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -257,7 +231,6 @@
         }
 
         /* NOTES */
-
         #notes {
             background: #FFF9F7;
             min-height: calc(100vh - 115px);
@@ -267,7 +240,6 @@
         }
 
         /* NOTEBOOK BINDING */
-
         #notes::before {
             content: "";
             position: absolute;
@@ -275,16 +247,15 @@
             top: 12px;
             bottom: 12px;
             width: 12px;
-            background:
-                radial-gradient(
-                    ellipse 8px 10px at 0% 50%,
-                    transparent 0,
-                    transparent 4px,
-                    #A9A9A9 4px,
-                    #A9A9A9 6px,
-                    transparent 6px,
-                    transparent 100%
-                );
+            background: radial-gradient(
+                ellipse 8px 10px at 0% 50%,
+                transparent 0,
+                transparent 4px,
+                #A9A9A9 4px,
+                #A9A9A9 6px,
+                transparent 6px,
+                transparent 100%
+            );
             background-size: 12px 36px;
             background-repeat: repeat-y;
             opacity: 0.75;
@@ -301,9 +272,7 @@
             gap: 0;
         }
 
-        .note:hover {
-            background: #F4E8E6;
-        }
+        .note:hover { background: #F4E8E6; }
 
         .note-icon {
             width: 42px;
@@ -349,7 +318,6 @@
         }
 
         /* FAVORITE STAR */
-
         .favorite-button {
             font-size: 23px;
             padding: 5px;
@@ -360,34 +328,21 @@
             flex-shrink: 0;
         }
 
-        .favorite-button.favorite {
-            color: #D4A72C;
-        }
+        .favorite-button.favorite { color: #D4A72C; }
 
-        .favorite-button:hover {
-            transform: scale(1.15);
-        }
+        .favorite-button:hover { transform: scale(1.15); }
 
         .favorite-button.favorite-pop {
             animation: favoritePop 0.2s ease;
         }
 
         @keyframes favoritePop {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.3);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
 
         /* DELETE BUTTON */
-
         .delete-button {
             font-size: 20px;
             padding: 5px;
@@ -397,7 +352,6 @@
         }
 
         /* ADD BUTTON */
-
         .add-button {
             position: fixed;
             right: 16px;
@@ -421,7 +375,6 @@
         }
 
         /* CREATE MENU */
-
         .create-menu {
             position: fixed;
             right: 16px;
@@ -446,7 +399,6 @@
                 opacity: 0;
                 transform: translateY(10px) scale(0.95);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -461,12 +413,9 @@
             cursor: pointer;
         }
 
-        .create-option:hover {
-            background: #F4E8E6;
-        }
+        .create-option:hover { background: #F4E8E6; }
 
         /* NOTE EDITOR */
-
         #editor {
             display: none;
             min-height: 100vh;
@@ -483,10 +432,7 @@
             gap: 12px;
         }
 
-        .back {
-            font-size: 25px;
-            cursor: pointer;
-        }
+        .back { font-size: 25px; cursor: pointer; }
 
         .editor-title {
             flex: 1;
@@ -505,9 +451,7 @@
             cursor: pointer;
         }
 
-        .editor-content {
-            padding: 16px;
-        }
+        .editor-content { padding: 16px; }
 
         #titleInput {
             width: 100%;
@@ -538,10 +482,7 @@
         }
 
         /* PAGE TURN */
-
-        body.page-turn {
-            overflow: hidden;
-        }
+        body.page-turn { overflow: hidden; }
 
         body.page-turn #editor {
             display: block !important;
@@ -555,7 +496,6 @@
                 transform: perspective(1200px) rotateY(0deg) scale(1);
                 opacity: 1;
             }
-
             100% {
                 transform: perspective(1200px) rotateY(-90deg) scale(0.96);
                 opacity: 0;
@@ -574,7 +514,6 @@
         }
 
         /* TODO EDITOR */
-
         #todoEditor {
             display: none;
             min-height: 100vh;
@@ -591,10 +530,7 @@
             gap: 12px;
         }
 
-        .todo-back {
-            font-size: 25px;
-            cursor: pointer;
-        }
+        .todo-back { font-size: 25px; cursor: pointer; }
 
         .todo-title {
             flex: 1;
@@ -613,9 +549,7 @@
             cursor: pointer;
         }
 
-        .todo-content {
-            padding: 16px;
-        }
+        .todo-content { padding: 16px; }
 
         #todoTitleInput {
             width: 100%;
@@ -636,9 +570,7 @@
             font-weight: bold;
         }
 
-        #todoItems {
-            margin-top: 18px;
-        }
+        #todoItems { margin-top: 18px; }
 
         .todo-item {
             display: flex;
@@ -674,13 +606,8 @@
         }
 
         @keyframes strike {
-            from {
-                text-decoration-color: transparent;
-            }
-
-            to {
-                text-decoration-color: #A99797;
-            }
+            from { text-decoration-color: transparent; }
+            to { text-decoration-color: #A99797; }
         }
 
         .remove-todo {
@@ -717,7 +644,6 @@
         }
 
         /* CONFETTI */
-
         .confetti {
             position: fixed;
             top: -12px;
@@ -729,13 +655,8 @@
             animation: confettiFall 3s ease-in forwards;
         }
 
-        .confetti:nth-child(3n) {
-            background: #D9A6A6;
-        }
-
-        .confetti:nth-child(3n + 1) {
-            background: #D4A72C;
-        }
+        .confetti:nth-child(3n) { background: #D9A6A6; }
+        .confetti:nth-child(3n + 1) { background: #D4A72C; }
 
         @keyframes confettiFall {
             to {
@@ -745,7 +666,6 @@
         }
 
         /* SIDE NAVIGATION */
-
         .side-menu {
             position: fixed;
             top: 0;
@@ -761,9 +681,7 @@
             transition: left 0.3s ease;
         }
 
-        .side-menu.open {
-            left: 0;
-        }
+        .side-menu.open { left: 0; }
 
         .menu-header {
             min-height: 78px;
@@ -776,15 +694,8 @@
             font-family: Arial, sans-serif;
         }
 
-        .menu-title {
-            font-size: 19px;
-            font-weight: bold;
-        }
-
-        .close-menu {
-            font-size: 29px;
-            cursor: pointer;
-        }
+        .menu-title { font-size: 19px; font-weight: bold; }
+        .close-menu { font-size: 29px; cursor: pointer; }
 
         .menu-item {
             padding: 15px;
@@ -794,12 +705,9 @@
             cursor: pointer;
         }
 
-        .menu-item:hover {
-            background: #F4E8E6;
-        }
+        .menu-item:hover { background: #F4E8E6; }
 
         /* OVERLAY */
-
         .overlay {
             position: fixed;
             inset: 0;
@@ -810,213 +718,326 @@
             display: none;
         }
 
-        .overlay.show {
-            display: block;
-        }
+        .overlay.show { display: block; }
 
-        /* DARK MODE */
+        /* DARK MODE — MATCHES SETTINGS */
+        :root { color-scheme: light; }
 
         body.dark-mode {
-            background: #2F2928;
-            color: #C9A7A0;
+            color-scheme: dark;
+            background: #3A3536;
+            color: #F4E8E6;
         }
 
         body.dark-mode .topbar {
-            background: #242120;
-            color: #C9A7A0;
+            background: #593A3B;
+            color: #F4E8E6;
         }
 
+        body.dark-mode .blank-space-logo { color: #F4E8E6; }
+
         body.dark-mode .sortbar {
-            background: #4A3A37;
-            color: #C9A7A0;
+            background: #494041;
+            color: #F4E8E6;
             border-bottom-color: #B86F72;
         }
 
-        body.dark-mode #notes {
-            background: #3A3230;
-        }
-
-        body.dark-mode #notes::before {
-            opacity: 0.45;
-        }
-
-        body.dark-mode .note {
-            border-bottom-color: #594A47;
-        }
-
-        body.dark-mode .note:hover {
-            background: #463B38;
-        }
-
-        body.dark-mode .note-title {
-            color: #C9A7A0;
-        }
-
-        body.dark-mode .note-preview {
-            color: #A99089;
-        }
-
-        body.dark-mode .note-date {
-            color: #C9A7A0;
-        }
-
-        body.dark-mode .favorite-button {
-            color: #C9A7A0;
-        }
-
-        body.dark-mode .delete-button {
-            color: #C9A7A0;
-        }
+        body.dark-mode #notes { background: #494041; }
+        body.dark-mode #notes::before { opacity: 0.4; }
+        body.dark-mode .note { border-bottom-color: #625354; }
+        body.dark-mode .note:hover { background: #554849; }
+        body.dark-mode .note-title { color: #F4E8E6; }
+        body.dark-mode .note-preview { color: #C5B5B3; }
+        body.dark-mode .note-date { color: #F4E8E6; }
+        body.dark-mode .favorite-button { color: #F4E8E6; }
+        body.dark-mode .favorite-button.favorite { color: #D4A72C; }
+        body.dark-mode .delete-button { color: #F4E8E6; }
 
         body.dark-mode .create-menu {
-            background: #403735;
+            background: #494041;
+            border: 1px solid #625354;
         }
 
-        body.dark-mode .create-option {
-            color: #C9A7A0;
-        }
-
-        body.dark-mode .create-option:hover {
-            background: #50413E;
-        }
+        body.dark-mode .create-option { color: #F4E8E6; }
+        body.dark-mode .create-option:hover { background: #554849; }
 
         body.dark-mode #editor,
         body.dark-mode #todoEditor {
-            background: #3A3230;
+            background: #3A3536;
         }
 
         body.dark-mode .editor-top,
         body.dark-mode .todo-top {
-            background: #242120;
+            background: #593A3B;
+            color: #F4E8E6;
         }
+
+        body.dark-mode .editor-title,
+        body.dark-mode .todo-title { color: #F4E8E6; }
 
         body.dark-mode #titleInput,
         body.dark-mode #noteInput,
         body.dark-mode #todoTitleInput,
-        body.dark-mode .todo-text {
-            color: #C9A7A0;
-        }
+        body.dark-mode .todo-text { color: #F4E8E6; }
 
         body.dark-mode #titleInput::placeholder,
         body.dark-mode #noteInput::placeholder,
         body.dark-mode #todoTitleInput::placeholder,
-        body.dark-mode .todo-text::placeholder {
-            color: #806F6A;
+        body.dark-mode .todo-text::placeholder { color: #C5B5B3; }
+
+        body.dark-mode .todo-counter { color: #C5B5B3; }
+        body.dark-mode .todo-item { border-bottom-color: #625354; }
+
+        body.dark-mode .todo-item.completed .todo-text {
+            color: #B8A7A6;
         }
 
-        body.dark-mode .todo-counter {
-            color: #A99089;
-        }
-
-        body.dark-mode .todo-item {
-            border-bottom-color: #594A47;
-        }
-
-        body.dark-mode .side-menu {
-            background: #3A3230;
-        }
+        body.dark-mode .side-menu { background: #494041; }
 
         body.dark-mode .menu-header {
-            background: #242120;
+            background: #593A3B;
+            color: #D9A6A6;
         }
 
         body.dark-mode .menu-item {
-            color: #C9A7A0;
-            border-bottom-color: #594A47;
+            color: #F4E8E6;
+            border-bottom-color: #625354;
         }
 
-        body.dark-mode .menu-item:hover {
-            background: #463B38;
-        }
+        body.dark-mode .menu-item:hover { background: #554849; }
 
         body.dark-mode .welcome-popup {
-            background-color: #2F2928;
+            background-color: #3A3536;
             background-image: repeating-linear-gradient(
                 to bottom,
                 transparent 0,
                 transparent 39px,
-                rgba(184, 111, 114, 0.35) 40px
+                rgba(217, 166, 166, 0.3) 40px
             );
         }
 
-        body.dark-mode .welcome-brand {
-            color: #C9A7A0;
-        }
+        body.dark-mode .welcome-brand { color: #F4E8E6; }
 
         body.dark-mode .welcome-bubble {
-            background: #593A3B;
-            border-color: #B86F72;
+            background: #494041;
+            border-color: #625354;
+            box-shadow: 0 10px 30px #00000033;
         }
 
-        body.dark-mode .welcome-popup h2 {
-            color: #C9A7A0;
-        }
-
-        body.dark-mode .welcome-popup p {
-            color: #A99089;
-        }
+        body.dark-mode .welcome-popup h2 { color: #F4E8E6; }
+        body.dark-mode .welcome-popup p { color: #C5B5B3; }
 
         body.dark-mode .spacebar-logo {
-            background: #593A3B;
-            border-color: #B86F72;
-            box-shadow:
-                0 3px 0 #8F5659,
-                0 5px 8px #00000055;
-            color: #C9A7A0;
+            background: #B86F72;
+            border-color: #D9A6A6;
+            box-shadow: 0 3px 0 #854D50, 0 5px 8px #00000033;
+            color: #FFF9F7;
         }
 
-        /* SMALLER PHONES */
+        body.dark-mode .welcome-logo .spacebar-logo {
+            background: #B86F72;
+            color: #FFF9F7;
+        }
 
-        @media (max-width: 360px) {
+        body.dark-mode .add-task {
+            background: #D9A6A6;
+            color: #593A3B;
+        }
+
+        body.dark-mode .delete-note,
+        body.dark-mode .delete-todo-list,
+        body.dark-mode .save,
+        body.dark-mode .todo-save {
+            background: #B86F72;
+            color: #FFFFFF;
+        }
+
+        body.dark-mode .add-button {
+            background: #B86F72;
+            color: #FFFFFF;
+        }
+
+        body.dark-mode .add-button:hover {
+            background: #D9A6A6;
+            color: #593A3B;
+        }
+
+        body.dark-mode .todo-checkbox { accent-color: #D9A6A6; }
+
+        /* MOBILE LAYOUT */
+        @media (max-width: 480px) {
             .topbar {
-                padding: 0 9px;
-                gap: 9px;
+                min-height: 54px;
+                padding: 0 10px;
+                gap: 10px;
             }
 
-            .blank-space-logo {
-                font-size: 15px;
-                gap: 4px;
-            }
+            .menu { font-size: 22px; }
+            .blank-space-logo { font-size: 15px; gap: 4px; }
 
             .spacebar-logo {
-                width: 77px;
-                height: 31px;
-                font-size: 14px;
+                width: 78px;
+                height: 30px;
                 padding: 0 4px;
+                font-size: 14px;
             }
 
             .sortbar {
-                padding: 9px 7px;
-                font-size: 15px;
+                padding: 8px;
+                font-size: 14px;
+                border-bottom-width: 2px;
             }
 
-            .sortbar-center {
-                font-size: 10px;
+            .sortbar-center { font-size: 10px; }
+
+            #notes {
+                padding-left: 15px;
+                min-height: calc(100dvh - 100px);
             }
 
-            .note {
-                padding: 10px 6px;
+            #notes::before {
+                left: 2px;
+                width: 10px;
+                background-size: 10px 32px;
             }
+
+            .note { padding: 9px 5px; }
 
             .note-icon {
-                width: 36px;
-                height: 36px;
+                width: 34px;
+                height: 34px;
                 margin-right: 7px;
-                font-size: 17px;
+                font-size: 16px;
             }
 
-            .note-title {
-                font-size: 15px;
+            .note-title { font-size: 14px; }
+
+            .note-preview {
+                font-size: 12px;
+                margin-top: 3px;
+            }
+
+            .note-date {
+                font-size: 11px;
+                margin-top: 3px;
             }
 
             .favorite-button {
-                font-size: 21px;
+                font-size: 20px;
                 padding: 4px;
             }
 
             .delete-button {
                 font-size: 18px;
                 padding: 4px;
+            }
+
+            .add-button {
+                width: 48px;
+                height: 48px;
+                right: 13px;
+                bottom: 13px;
+                font-size: 29px;
+            }
+
+            .create-menu {
+                right: 13px;
+                bottom: 70px;
+                width: 175px;
+            }
+
+            .create-option {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .editor-top,
+            .todo-top {
+                padding: 10px;
+                gap: 9px;
+            }
+
+            .editor-title,
+            .todo-title { font-size: 16px; }
+
+            .editor-content,
+            .todo-content { padding: 12px; }
+
+            #titleInput,
+            #todoTitleInput { font-size: 19px; }
+
+            #noteInput {
+                font-size: 16px;
+                height: 58dvh;
+            }
+
+            .todo-text { font-size: 15px; }
+
+            .todo-checkbox {
+                width: 19px;
+                height: 19px;
+            }
+
+            .welcome-brand { font-size: 22px; }
+            .welcome-logo { font-size: 18px; }
+
+            .welcome-logo .spacebar-logo {
+                width: 94px;
+                height: 33px;
+            }
+
+            .welcome-bubble {
+                width: min(270px, 88vw);
+                min-height: 130px;
+                padding: 14px;
+            }
+
+            .welcome-popup h2 { font-size: 18px; }
+            .welcome-popup p { font-size: 13px; }
+        }
+
+        @media (max-width: 360px) {
+            .topbar {
+                padding: 0 8px;
+                gap: 7px;
+            }
+
+            .blank-space-logo {
+                font-size: 13px;
+                gap: 3px;
+            }
+
+            .spacebar-logo {
+                width: 70px;
+                height: 28px;
+                font-size: 13px;
+            }
+
+            .sortbar {
+                padding: 7px 5px;
+                font-size: 12px;
+            }
+
+            .sortbar-center { font-size: 9px; }
+            .note { padding: 8px 3px; }
+
+            .note-icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 6px;
+                font-size: 15px;
+            }
+
+            .note-title { font-size: 13px; }
+
+            .favorite-button {
+                font-size: 18px;
+                padding: 3px;
+            }
+
+            .delete-button {
+                font-size: 17px;
+                padding: 3px;
             }
         }
     </style>
@@ -1025,15 +1046,12 @@
 <body>
 
 <!-- WELCOME SCREEN -->
-
 <div class="welcome-popup" id="welcomePopup">
     <div class="welcome-container">
         <div class="welcome-brand">
             <div class="blank-space-logo welcome-logo">
                 <span>Blank</span>
-                <div class="spacebar-logo">
-                    <span>Space</span>
-                </div>
+                <div class="spacebar-logo"><span>Space</span></div>
             </div>
         </div>
 
@@ -1046,7 +1064,6 @@
 </div>
 
 <!-- SIDE MENU -->
-
 <div class="side-menu" id="sideMenu">
     <div class="menu-header">
         <div class="menu-title">BLANK SPACE</div>
@@ -1065,7 +1082,6 @@
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <!-- HOME -->
-
 <div id="home">
     <div class="topbar">
         <div class="menu" onclick="openMenu()">☰</div>
@@ -1073,9 +1089,7 @@
         <div class="app-name">
             <div class="blank-space-logo">
                 <span>Blank</span>
-                <div class="spacebar-logo">
-                    <span>Space</span>
-                </div>
+                <div class="spacebar-logo"><span>Space</span></div>
             </div>
         </div>
     </div>
@@ -1099,7 +1113,6 @@
 </div>
 
 <!-- NOTE EDITOR -->
-
 <div id="editor">
     <div class="editor-top">
         <div class="back" onclick="goBack()">←</div>
@@ -1115,7 +1128,6 @@
 </div>
 
 <!-- TODO EDITOR -->
-
 <div id="todoEditor">
     <div class="todo-top">
         <div class="todo-back" onclick="goBackFromTodo()">←</div>
@@ -1125,11 +1137,8 @@
 
     <div class="todo-content">
         <input type="text" id="todoTitleInput" placeholder="List title...">
-
         <div class="todo-counter" id="todoCounter">0 / 0 completed</div>
-
         <div id="todoItems"></div>
-
         <button class="add-task" onclick="addTodoItem()">+ Add Task</button>
         <br>
         <button class="delete-todo-list" onclick="deleteTodo()">Delete List</button>
@@ -1137,15 +1146,11 @@
 </div>
 
 <script>
-    /* LOAD SAVED THEME
-       Light mode is the default unless dark mode was saved in Settings. */
-
-    if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("dark-mode");
-    }
+    /* LOAD SAVED THEME */
+    const savedDarkMode = localStorage.getItem("darkMode") === "true";
+    document.body.classList.toggle("dark-mode", savedDarkMode);
 
     /* DELETE CONFIRMATION */
-
     function shouldConfirmDelete(message) {
         return localStorage.getItem("deleteConfirmation") !== "false"
             ? confirm(message)
@@ -1153,14 +1158,12 @@
     }
 
     /* DATA */
-
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     let currentNote = null;
     let currentTodo = null;
     let todoItems = [];
 
     /* WELCOME SCREEN */
-
     function showWelcome() {
         const hour = new Date().getHours();
 
@@ -1197,7 +1200,6 @@
 
             setTimeout(function() {
                 popup.remove();
-
                 const home = document.getElementById("home");
                 home.classList.add("show-home");
             }, 400);
@@ -1205,7 +1207,6 @@
     }
 
     /* SIDE MENU */
-
     function openMenu() {
         document.getElementById("sideMenu").classList.add("open");
         document.getElementById("overlay").classList.add("show");
@@ -1217,7 +1218,6 @@
     }
 
     /* NAVIGATION */
-
     function goToNotes() {
         closeMenu();
 
@@ -1254,7 +1254,6 @@
     }
 
     /* HELP & SUPPORT */
-
     function contactSupport() {
         closeMenu();
 
@@ -1264,7 +1263,6 @@
     }
 
     /* CREATE MENU */
-
     function toggleCreateMenu() {
         document.getElementById("createMenu").classList.toggle("show");
     }
@@ -1290,7 +1288,6 @@
     }
 
     /* SHOW NOTES */
-
     function displayNotes() {
         const notesContainer = document.getElementById("notes");
         notesContainer.innerHTML = "";
@@ -1414,7 +1411,6 @@
     }
 
     /* COMPLETED TODAY */
-
     function getTodayKey() {
         const today = new Date();
 
@@ -1446,7 +1442,6 @@
     }
 
     /* NORMAL NOTE */
-
     function newNote() {
         currentNote = null;
 
@@ -1471,7 +1466,6 @@
     }
 
     /* SAVE NOTE */
-
     function saveNote() {
         const title = document.getElementById("titleInput").value.trim();
         const text = document.getElementById("noteInput").value;
@@ -1531,7 +1525,6 @@
     }
 
     /* TODO LIST */
-
     function addTodoItem(text = "", completed = false) {
         todoItems.push({
             text: text,
@@ -1709,7 +1702,6 @@
     }
 
     /* DATE */
-
     function getDate() {
         const today = new Date();
 
@@ -1723,7 +1715,6 @@
     }
 
     /* CLOSE CREATE MENU */
-
     document.addEventListener("click", function(event) {
         const menu = document.getElementById("createMenu");
         const button = document.querySelector(".add-button");
@@ -1737,7 +1728,6 @@
     });
 
     /* START APP */
-
     displayNotes();
     showWelcome();
 </script>
