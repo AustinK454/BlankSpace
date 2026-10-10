@@ -1,236 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#593A3B">
 
     <title>Blank Space - Calendar</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            background: #F4E8E6;
-            color: #593A3B;
-            font-family: Arial, sans-serif;
-            transition: background 0.3s, color 0.3s;
+        :root {
+            color-scheme: light;
+            --page: #F4E8E6;
+            --card: #FFF9F7;
+            --text: #593A3B;
+            --muted: #806B6B;
+            --accent: #B86F72;
+            --border: #D8C2C1;
+            --hover: #F9EFED;
+            --today: #E5C0BE;
+            --header-text: #FFF9F7;
+            --input-text: #593A3B;
         }
 
+        body.dark {
+            color-scheme: dark;
+            --page: #292627;
+            --card: #3A3030;
+            --text: #F4E8E6;
+            --muted: #C4AEAC;
+            --accent: #C98286;
+            --border: #514344;
+            --hover: #463838;
+            --today: #5A4142;
+            --header-text: #FFF9F7;
+            --input-text: #F4E8E6;
+        }
 
-        /* =========================
-           TOP BAR
-        ========================= */
+        html {
+            min-height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--page);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        button,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
 
         .topbar {
-            height: 70px;
+            min-height: 65px;
             background: #593A3B;
             color: #FFF9F7;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            gap: 20px;
-            box-shadow: 0 4px 12px #593A3B20;
+            padding: 10px 16px;
+            gap: 16px;
+            box-shadow: 0 4px 12px #00000018;
         }
 
         .back {
+            border: none;
+            background: transparent;
+            color: #FFF9F7;
             font-size: 30px;
             cursor: pointer;
-            transition: transform 0.15s ease;
-        }
-
-        .back:active {
-            transform: scale(0.9);
+            padding: 0;
+            line-height: 1;
         }
 
         .page-title {
-            font-size: 27px;
+            font-size: 24px;
             font-weight: bold;
             flex: 1;
-            letter-spacing: 0.5px;
         }
-
-
-        /* =========================
-           YEAR / INTRO
-        ========================= */
 
         .year-section {
             text-align: center;
-            padding: 20px 20px 10px;
+            padding: 18px 12px 8px;
         }
 
         #year {
-            font-size: 25px;
+            font-size: 24px;
             font-weight: bold;
-            color: #593A3B;
+            color: var(--text);
         }
 
         .calendar-subtitle {
             margin-top: 5px;
-            font-size: 13px;
-            color: #B86F72;
-            font-style: italic;
+            font-size: 12px;
+            color: var(--accent);
         }
 
-
-        /* =========================
-           MONTH NAVIGATION
-        ========================= */
-
         .month-navigation {
+            width: 100%;
             max-width: 900px;
             margin: 0 auto;
-            padding: 5px 20px 20px;
+            padding: 8px 12px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .month-navigation button {
+        .month-navigation button,
+        .today-button {
             border: none;
-            background: #B86F72;
+            background: var(--accent);
             color: #FFF9F7;
             cursor: pointer;
-            transition:
-                transform 0.15s ease,
-                background 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .month-navigation button:active {
-            transform: scale(0.92);
+            touch-action: manipulation;
         }
 
         .month-arrow {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 10px;
             font-size: 25px;
             font-weight: bold;
-            box-shadow: 0 3px 8px #593A3B20;
         }
 
-        .month-arrow:hover {
-            background: #A96165;
-        }
-
-        .month-navigation button.today-button {
-            padding: 9px 17px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: bold;
-            background: #593A3B;
-            box-shadow: 0 3px 8px #593A3B20;
-        }
-
-        .month-navigation button.today-button:hover {
-            background: #6B4849;
+        .month-navigation button:active,
+        .today-button:active {
+            transform: scale(0.96);
         }
 
         .month-display {
-            min-width: 190px;
+            flex: 1;
+            min-width: 0;
             text-align: center;
         }
 
         .month-display-name {
-            font-size: 27px;
+            font-size: 25px;
             font-weight: bold;
-            color: #593A3B;
+            color: var(--text);
         }
 
         .month-display-year {
-            font-size: 13px;
-            color: #B86F72;
-            margin-top: 2px;
+            margin-top: 3px;
+            font-size: 12px;
+            color: var(--accent);
         }
 
+        .today-container {
+            text-align: center;
+            margin-bottom: 18px;
+        }
 
-        /* =========================
-           MONTH
-        ========================= */
+        .today-button {
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
 
         .month {
+            width: 100%;
             max-width: 900px;
-            margin: 0 auto 55px;
-            padding: 0 20px;
+            margin: 0 auto 40px;
+            padding: 0 12px;
         }
 
         .month-title {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 34px;
-            margin-bottom: 14px;
-            color: #593A3B;
+            gap: 10px;
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: var(--text);
             font-weight: bold;
-            letter-spacing: -0.5px;
+            overflow-wrap: anywhere;
         }
 
         .month-title::before {
             content: "";
-            width: 7px;
-            height: 34px;
-            background: #B86F72;
+            width: 6px;
+            height: 28px;
+            flex-shrink: 0;
+            background: var(--accent);
             border-radius: 5px;
         }
 
         .month-title::after {
             content: "✦";
-            font-size: 14px;
-            color: #B86F72;
-            opacity: 0.7;
-            margin-left: 2px;
+            font-size: 13px;
+            color: var(--accent);
         }
-
-
-        /* =========================
-           CALENDAR BOX
-        ========================= */
 
         .calendar-box {
-            background: #FFF9F7;
-            color: #593A3B;
-            border: 2px solid #B86F72;
-            border-radius: 18px;
+            width: 100%;
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow:
-                0 8px 20px #593A3B18,
-                0 2px 4px #593A3B10;
-            position: relative;
+            box-shadow: 0 5px 15px #00000010;
         }
 
-        .calendar-box::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3px;
-            background: #B86F72;
-            opacity: 0.35;
+        .weekdays,
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
         }
-
-
-        /* =========================
-           WEEKDAYS
-        ========================= */
 
         .weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
             background: #593A3B;
             color: #FFF9F7;
         }
 
         .weekday {
+            min-width: 0;
             text-align: center;
-            padding: 11px 4px;
+            padding: 10px 0;
+            font-size: 12px;
             font-weight: bold;
-            font-size: 13px;
             border-right: 1px solid #806B6B;
         }
 
@@ -238,998 +242,488 @@
             border-right: none;
         }
 
-
-        /* =========================
-           DAYS
-        ========================= */
-
-        .days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
+        .day {
+            min-width: 0;
+            min-height: 100px;
+            padding: 5px;
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .day {
-            min-height: 110px;
-            padding: 9px;
-            border-right: 1px solid #D8C2C1;
-            border-bottom: 1px solid #D8C2C1;
-            cursor: text;
-            transition:
-                background 0.2s ease,
-                box-shadow 0.2s ease,
-                transform 0.15s ease;
-            position: relative;
+        .day:nth-child(7n) {
+            border-right: none;
         }
 
         .day:hover {
-            background: #F9EFED;
-            box-shadow: inset 0 0 0 2px #B86F7225;
-        }
-
-        .day:active {
-            transform: scale(0.995);
+            background: var(--hover);
         }
 
         .day-number {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #593A3B;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 27px;
-            height: 27px;
+            min-width: 25px;
+            height: 25px;
+            margin-bottom: 4px;
             border-radius: 50%;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: bold;
         }
 
         .day textarea {
+            display: block;
             width: 100%;
-            height: 70px;
+            height: 55px;
+            min-width: 0;
+            padding: 2px;
             border: none;
+            border-radius: 4px;
             outline: none;
             resize: none;
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent 20px,
-                    #B86F7220 21px,
-                    transparent 22px
-                );
-            color: #B86F72;
+            background: transparent;
+            color: var(--input-text);
             font-family: Arial, sans-serif;
-            font-size: 13px;
-            padding: 0;
-            font-weight: bold;
-            line-height: 21px;
-        }
-
-        .day textarea::placeholder {
-            color: #B8A2A2;
-            font-weight: normal;
+            font-size: 12px;
+            line-height: 17px;
+            overflow-wrap: anywhere;
+            overflow-x: hidden;
         }
 
         .day textarea:focus {
-            color: #593A3B;
+            background: var(--hover);
+            box-shadow: inset 0 0 0 1px var(--accent);
         }
 
-
-        /* =========================
-           CLEAR BUTTON
-        ========================= */
+        .day textarea::placeholder {
+            color: var(--muted);
+            opacity: 0.8;
+        }
 
         .clear-day {
-            margin-top: 5px;
+            display: block;
+            margin-top: 3px;
+            padding: 3px 0;
             border: none;
             background: transparent;
-            color: #B86F72;
-            font-size: 11px;
+            color: var(--accent);
+            font-size: 10px;
             cursor: pointer;
-            padding: 2px 0;
-            transition: opacity 0.2s ease;
         }
-
-        .clear-day:hover {
-            text-decoration: underline;
-        }
-
-        .clear-day:active {
-            opacity: 0.5;
-        }
-
-
-        /* =========================
-           EMPTY DAYS
-        ========================= */
 
         .empty {
-            min-height: 110px;
-            border-right: 1px solid #D8C2C1;
-            border-bottom: 1px solid #D8C2C1;
-            background: #F9EFED;
+            min-width: 0;
+            min-height: 100px;
+            background: var(--page);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-
-        /* =========================
-           TODAY
-        ========================= */
+        .empty:nth-child(7n) {
+            border-right: none;
+        }
 
         .today {
-            background: #E5C0BE;
-            box-shadow: inset 0 0 0 2px #B86F72;
+            background: var(--today);
+            box-shadow: inset 0 0 0 2px var(--accent);
         }
 
         .today .day-number {
-            background: #B86F72;
+            background: var(--accent);
             color: #FFF9F7;
-            box-shadow: 0 2px 5px #593A3B25;
-        }
-
-
-        /* =========================
-           DARK MODE
-        ========================= */
-
-        body.dark {
-            background: #292627;
-            color: #F4E8E6;
-        }
-
-        body.dark #year {
-            color: #F4E8E6;
-        }
-
-        body.dark .calendar-subtitle {
-            color: #D9A6A6;
-        }
-
-        body.dark .month-title {
-            color: #F4E8E6;
-        }
-
-        body.dark .month-display-name {
-            color: #F4E8E6;
-        }
-
-        body.dark .month-display-year {
-            color: #D9A6A6;
         }
 
         body.dark .calendar-box {
-            background: #3A3030;
-            color: #F4E8E6;
-            border-color: #B86F72;
-        }
-
-        body.dark .day {
-            background: #3A3030;
-            border-color: #514344;
-        }
-
-        body.dark .day:hover {
-            background: #403535;
-        }
-
-        body.dark .day-number {
-            color: #F4E8E6;
-        }
-
-        body.dark .day textarea {
-            color: #F4E8E6;
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent 20px,
-                    #B86F7230 21px,
-                    transparent 22px
-                );
-        }
-
-        body.dark .day textarea:focus {
-            color: #F4E8E6;
-        }
-
-        body.dark .day textarea::placeholder {
-            color: #8F7D7C;
-        }
-
-        body.dark .empty {
-            background: #292627;
-            border-color: #514344;
-        }
-
-        body.dark .clear-day {
-            color: #B86F72;
+            box-shadow: 0 5px 18px #00000030;
         }
 
         body.dark .today {
             background: #5A4142;
-            box-shadow: inset 0 0 0 2px #B86F72;
         }
 
-        body.dark .today .day-number {
-            background: #B86F72;
-            color: #FFF9F7;
+        body.dark .day textarea {
+            color: #F4E8E6;
         }
 
-        body.dark .month-navigation button.today-button {
-            background: #B86F72;
+        body.dark .today-button {
+            background: var(--accent);
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 600px) {
-
             .topbar {
-                height: 65px;
+                min-height: 58px;
+                padding: 8px 13px;
+                gap: 12px;
+            }
+
+            .back {
+                font-size: 27px;
             }
 
             .page-title {
-                font-size: 24px;
+                font-size: 21px;
             }
 
             .year-section {
-                padding: 17px 15px 5px;
+                padding-top: 14px;
             }
 
             #year {
                 font-size: 21px;
             }
 
-            .calendar-subtitle {
-                font-size: 11px;
-            }
-
             .month-navigation {
-                padding: 5px 12px 17px;
                 gap: 7px;
+                padding: 7px 10px 14px;
             }
 
             .month-arrow {
-                width: 38px;
-                height: 38px;
-                border-radius: 10px;
+                width: 35px;
+                height: 37px;
                 font-size: 22px;
             }
 
-            .month-display {
-                min-width: 145px;
-            }
-
             .month-display-name {
-                font-size: 23px;
+                font-size: 21px;
             }
 
             .month-display-year {
                 font-size: 11px;
             }
 
-            .month-navigation button.today-button {
-                padding: 8px 12px;
-                font-size: 10px;
-            }
-
             .month {
-                padding: 0 12px;
-                margin-bottom: 40px;
+                padding: 0 5px;
+                margin-bottom: 25px;
             }
 
             .month-title {
-                font-size: 27px;
+                font-size: 24px;
+                margin-left: 5px;
             }
 
-            .month-title::before {
-                height: 27px;
-                width: 6px;
-            }
-
-            .month-title::after {
-                font-size: 12px;
+            .calendar-box {
+                border-radius: 9px;
             }
 
             .weekday {
+                padding: 9px 0;
                 font-size: 10px;
-                padding: 9px 2px;
             }
 
             .day {
-                min-height: 85px;
-                padding: 5px;
+                min-height: 78px;
+                padding: 3px;
             }
 
             .empty {
-                min-height: 85px;
+                min-height: 78px;
             }
 
             .day-number {
-                font-size: 13px;
-                min-width: 23px;
-                height: 23px;
+                min-width: 21px;
+                height: 21px;
+                font-size: 11px;
+                margin-bottom: 3px;
             }
 
             .day textarea {
-                height: 55px;
+                height: 43px;
+                padding: 1px;
                 font-size: 10px;
-                line-height: 18px;
-                background:
-                    repeating-linear-gradient(
-                        to bottom,
-                        transparent 0,
-                        transparent 17px,
-                        #B86F7220 18px,
-                        transparent 19px
-                    );
+                line-height: 14px;
             }
 
             .clear-day {
+                margin-top: 2px;
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .month-navigation {
+                gap: 5px;
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+
+            .month-arrow {
+                width: 31px;
+                height: 34px;
+            }
+
+            .month-display-name {
+                font-size: 18px;
+            }
+
+            .month {
+                padding: 0 3px;
+            }
+
+            .weekday {
                 font-size: 9px;
             }
 
+            .day {
+                min-height: 69px;
+                padding: 2px;
+            }
+
+            .empty {
+                min-height: 69px;
+            }
+
+            .day-number {
+                min-width: 19px;
+                height: 19px;
+                font-size: 10px;
+            }
+
+            .day textarea {
+                height: 38px;
+                font-size: 9px;
+                line-height: 12px;
+            }
+
+            .clear-day {
+                font-size: 8px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     TOP BAR
-========================= -->
-
-<div class="topbar">
-
-    <div
-        class="back"
-        onclick="goBack()"
-    >
-        ←
+    <div class="topbar">
+        <button class="back" onclick="goBack()" aria-label="Go back">←</button>
+        <div class="page-title">CALENDAR</div>
     </div>
 
-    <div class="page-title">
-        CALENDAR
+    <div class="year-section">
+        <div id="year"></div>
+        <div class="calendar-subtitle">Your space to plan and reflect</div>
     </div>
 
-</div>
+    <div class="month-navigation">
+        <button class="month-arrow" onclick="previousMonth()" aria-label="Previous month">‹</button>
 
+        <div class="month-display">
+            <div id="monthDisplayName" class="month-display-name"></div>
+            <div id="monthDisplayYear" class="month-display-year"></div>
+        </div>
 
-<!-- =========================
-     YEAR
-========================= -->
-
-<div class="year-section">
-
-    <div id="year"></div>
-
-    <div class="calendar-subtitle">
+        <button class="month-arrow" onclick="nextMonth()" aria-label="Next month">›</button>
     </div>
 
-</div>
-
-
-<!-- =========================
-     MONTH NAVIGATION
-========================= -->
-
-<div class="month-navigation">
-
-    <button
-        class="month-arrow"
-        onclick="previousMonth()"
-    >
-        ‹
-    </button>
-
-    <div class="month-display">
-
-        <div
-            id="monthDisplayName"
-            class="month-display-name"
-        ></div>
-
-        <div
-            id="monthDisplayYear"
-            class="month-display-year"
-        ></div>
-
+    <div class="today-container">
+        <button class="today-button" onclick="goToToday()">Today</button>
     </div>
 
-    <button
-        class="month-arrow"
-        onclick="nextMonth()"
-    >
-        ›
-    </button>
+    <div id="calendar"></div>
 
-</div>
-
-
-<div style="text-align:center; margin-bottom:20px;">
-
-    <button
-        class="today-button"
-        onclick="goToToday()"
-        style="
-            border:none;
-            background:#593A3B;
-            color:#FFF9F7;
-            padding:9px 17px;
-            border-radius:10px;
-            font-size:12px;
-            font-weight:bold;
-            cursor:pointer;
-        "
-    >
-        Today
-    </button>
-
-</div>
-
-
-<!-- =========================
-     CALENDAR
-========================= -->
-
-<div id="calendar"></div>
-
-
-<script>
-
-
-    /* =========================
-       LOAD DARK MODE
-    ========================= */
-
-    if (
-        localStorage.getItem("darkMode") === "true"
-    ) {
-
-        document.body.classList.add("dark");
-
-    }
-
-
-    /* =========================
-       DELETE CONFIRMATION
-    ========================= */
-
-    function shouldConfirmDelete(message) {
-
-        return localStorage.getItem(
-            "deleteConfirmation"
-        ) !== "false"
-
-            ? confirm(message)
-
-            : true;
-
-    }
-
-
-    /* =========================
-       BACK TO NOTES
-    ========================= */
-
-    function goBack() {
-
-        window.location.href =
-            "notes.html";
-
-    }
-
-
-    /* =========================
-       CALENDAR DATA
-    ========================= */
-
-    const calendar =
-        document.getElementById(
-            "calendar"
-        );
-
-
-    const months = [
-
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-
-    ];
-
-
-    const weekdays = [
-
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-
-    ];
-
-
-    /* =========================
-       CURRENT DATE
-    ========================= */
-
-    const currentDate =
-        new Date();
-
-
-    let displayedMonth =
-        currentDate.getMonth();
-
-
-    let displayedYear =
-        currentDate.getFullYear();
-
-
-    document.getElementById(
-        "year"
-    ).textContent =
-        displayedYear;
-
-
-    /* =========================
-       PREVIOUS MONTH
-    ========================= */
-
-    function previousMonth() {
-
-        displayedMonth--;
-
-        if (displayedMonth < 0) {
-
-            displayedMonth = 11;
-
-            displayedYear--;
-
+    <script>
+        // Load the app's saved theme.
+        function applyTheme() {
+            document.body.classList.toggle(
+                "dark",
+                localStorage.getItem("darkMode") === "true"
+            );
         }
 
-        renderCalendar();
+        applyTheme();
 
-    }
-
-
-    /* =========================
-       NEXT MONTH
-    ========================= */
-
-    function nextMonth() {
-
-        displayedMonth++;
-
-        if (displayedMonth > 11) {
-
-            displayedMonth = 0;
-
-            displayedYear++;
-
-        }
-
-        renderCalendar();
-
-    }
-
-
-    /* =========================
-       GO TO TODAY
-    ========================= */
-
-    function goToToday() {
-
-        displayedMonth =
-            currentDate.getMonth();
-
-        displayedYear =
-            currentDate.getFullYear();
-
-        renderCalendar();
-
-    }
-
-
-    /* =========================
-       RENDER CALENDAR
-    ========================= */
-
-    function renderCalendar() {
-
-        calendar.innerHTML = "";
-
-
-        document.getElementById(
-            "year"
-        ).textContent =
-            displayedYear;
-
-
-        document.getElementById(
-            "monthDisplayName"
-        ).textContent =
-            months[displayedMonth];
-
-
-        document.getElementById(
-            "monthDisplayYear"
-        ).textContent =
-            displayedYear;
-
-
-        const monthContainer =
-            document.createElement(
-                "div"
-            );
-
-        monthContainer.className =
-            "month";
-
-
-        /* =========================
-           MONTH NAME
-        ========================= */
-
-        const title =
-            document.createElement(
-                "div"
-            );
-
-        title.className =
-            "month-title";
-
-        title.textContent =
-            months[displayedMonth];
-
-
-        monthContainer.appendChild(
-            title
-        );
-
-
-        /* =========================
-           CALENDAR BOX
-        ========================= */
-
-        const calendarBox =
-            document.createElement(
-                "div"
-            );
-
-        calendarBox.className =
-            "calendar-box";
-
-
-        /* =========================
-           WEEKDAYS
-        ========================= */
-
-        const weekdayRow =
-            document.createElement(
-                "div"
-            );
-
-        weekdayRow.className =
-            "weekdays";
-
-
-        weekdays.forEach(
-            function(day) {
-
-                const weekday =
-                    document.createElement(
-                        "div"
-                    );
-
-                weekday.className =
-                    "weekday";
-
-                weekday.textContent =
-                    day.substring(0, 3);
-
-                weekdayRow.appendChild(
-                    weekday
-                );
-
+        // Keep the theme updated if another open page changes it.
+        window.addEventListener("storage", function(event) {
+            if (event.key === "darkMode") {
+                applyTheme();
             }
-        );
+        });
 
+        function shouldConfirmDelete(message) {
+            return localStorage.getItem("deleteConfirmation") === "false"
+                || confirm(message);
+        }
 
-        calendarBox.appendChild(
-            weekdayRow
-        );
+        function goBack() {
+            window.location.href = "notes.html";
+        }
 
+        const calendar = document.getElementById("calendar");
 
-        /* =========================
-           DAYS
-        ========================= */
+        const months = [
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        ];
 
-        const days =
-            document.createElement(
-                "div"
-            );
+        const weekdays = [
+            "Sunday", "Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday"
+        ];
 
-        days.className =
-            "days";
+        let displayedMonth = new Date().getMonth();
+        let displayedYear = new Date().getFullYear();
 
+        function previousMonth() {
+            displayedMonth--;
 
-        const firstDay =
-            new Date(
-                displayedYear,
-                displayedMonth,
-                1
+            if (displayedMonth < 0) {
+                displayedMonth = 11;
+                displayedYear--;
+            }
+
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            displayedMonth++;
+
+            if (displayedMonth > 11) {
+                displayedMonth = 0;
+                displayedYear++;
+            }
+
+            renderCalendar();
+        }
+
+        function goToToday() {
+            const today = new Date();
+            displayedMonth = today.getMonth();
+            displayedYear = today.getFullYear();
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            calendar.innerHTML = "";
+
+            document.getElementById("year").textContent = displayedYear;
+            document.getElementById("monthDisplayName").textContent =
+                months[displayedMonth];
+            document.getElementById("monthDisplayYear").textContent =
+                displayedYear;
+
+            const monthContainer = document.createElement("div");
+            monthContainer.className = "month";
+
+            const title = document.createElement("div");
+            title.className = "month-title";
+            title.textContent = months[displayedMonth];
+
+            const calendarBox = document.createElement("div");
+            calendarBox.className = "calendar-box";
+
+            const weekdayRow = document.createElement("div");
+            weekdayRow.className = "weekdays";
+
+            weekdays.forEach(function(day) {
+                const weekday = document.createElement("div");
+                weekday.className = "weekday";
+                weekday.textContent = day.substring(0, 3);
+                weekdayRow.appendChild(weekday);
+            });
+
+            calendarBox.appendChild(weekdayRow);
+
+            const days = document.createElement("div");
+            days.className = "days";
+
+            const firstDay = new Date(
+                displayedYear, displayedMonth, 1
             ).getDay();
 
-
-        const numberOfDays =
-            new Date(
-                displayedYear,
-                displayedMonth + 1,
-                0
+            const numberOfDays = new Date(
+                displayedYear, displayedMonth + 1, 0
             ).getDate();
 
-
-        /* =========================
-           EMPTY DAYS
-        ========================= */
-
-        for (
-            let blank = 0;
-            blank < firstDay;
-            blank++
-        ) {
-
-            const empty =
-                document.createElement(
-                    "div"
-                );
-
-            empty.className =
-                "empty";
-
-            days.appendChild(
-                empty
-            );
-
-        }
-
-
-        /* =========================
-           ACTUAL DAYS
-        ========================= */
-
-        for (
-            let day = 1;
-            day <= numberOfDays;
-            day++
-        ) {
-
-            const dayBox =
-                document.createElement(
-                    "div"
-                );
-
-            dayBox.className =
-                "day";
-
-
-            /* =========================
-               CHECK TODAY
-            ========================= */
-
-            if (
-                displayedYear ===
-                    currentDate.getFullYear() &&
-
-                displayedMonth ===
-                    currentDate.getMonth() &&
-
-                day ===
-                    currentDate.getDate()
-            ) {
-
-                dayBox.classList.add(
-                    "today"
-                );
-
+            for (let blank = 0; blank < firstDay; blank++) {
+                const empty = document.createElement("div");
+                empty.className = "empty";
+                empty.setAttribute("aria-hidden", "true");
+                days.appendChild(empty);
             }
 
+            for (let day = 1; day <= numberOfDays; day++) {
+                const dayBox = document.createElement("div");
+                dayBox.className = "day";
 
-            /* =========================
-               DAY NUMBER
-            ========================= */
+                const today = new Date();
 
-            const number =
-                document.createElement(
-                    "div"
-                );
-
-            number.className =
-                "day-number";
-
-            number.textContent =
-                day;
-
-
-            /* =========================
-               TEXT AREA
-            ========================= */
-
-            const note =
-                document.createElement(
-                    "textarea"
-                );
-
-            note.placeholder =
-                "Write...";
-
-
-            /* =========================
-               SAVE KEY
-            ========================= */
-
-            const storageKey =
-                "calendar-" +
-                displayedYear +
-                "-" +
-                displayedMonth +
-                "-" +
-                day;
-
-
-            /* =========================
-               LOAD SAVED NOTE
-            ========================= */
-
-            const saved =
-                localStorage.getItem(
-                    storageKey
-                );
-
-
-            if (saved) {
-
-                note.value =
-                    saved;
-
-            }
-
-
-            /* =========================
-               SAVE WHEN TYPING
-            ========================= */
-
-            note.addEventListener(
-                "input",
-                function() {
-
-                    localStorage.setItem(
-                        storageKey,
-                        note.value
-                    );
-
+                if (
+                    displayedYear === today.getFullYear() &&
+                    displayedMonth === today.getMonth() &&
+                    day === today.getDate()
+                ) {
+                    dayBox.classList.add("today");
                 }
-            );
 
+                const number = document.createElement("div");
+                number.className = "day-number";
+                number.textContent = day;
 
-            /* =========================
-               CLEAR BUTTON
-            ========================= */
+                const note = document.createElement("textarea");
+                note.placeholder = "Write...";
+                note.setAttribute(
+                    "aria-label",
+                    "Note for " + months[displayedMonth] + " " +
+                    day + ", " + displayedYear
+                );
+                note.maxLength = 2000;
 
-            const clearButton =
-                document.createElement(
-                    "button"
+                const storageKey =
+                    "calendar-" + displayedYear + "-" +
+                    displayedMonth + "-" + day;
+
+                try {
+                    note.value = localStorage.getItem(storageKey) || "";
+                } catch (error) {
+                    console.error("Could not load calendar note:", error);
+                }
+
+                note.addEventListener("input", function() {
+                    try {
+                        if (note.value === "") {
+                            localStorage.removeItem(storageKey);
+                        } else {
+                            localStorage.setItem(storageKey, note.value);
+                        }
+                    } catch (error) {
+                        alert("Could not save this note. Your device storage may be full.");
+                    }
+                });
+
+                const clearButton = document.createElement("button");
+                clearButton.className = "clear-day";
+                clearButton.textContent = "Clear";
+                clearButton.setAttribute(
+                    "aria-label",
+                    "Clear note for " + months[displayedMonth] + " " + day
                 );
 
-            clearButton.className =
-                "clear-day";
-
-            clearButton.textContent =
-                "Clear";
-
-
-            clearButton.addEventListener(
-                "click",
-                function(event) {
-
-                    event.stopPropagation();
-
-
-                    if (
-                        note.value === "" &&
-                        !localStorage.getItem(
-                            storageKey
-                        )
-                    ) {
-
+                clearButton.addEventListener("click", function() {
+                    if (!note.value) {
                         return;
-
                     }
 
-
-                    if (
-                        shouldConfirmDelete(
-                            "Clear this day's note?"
-                        )
-                    ) {
-
+                    if (shouldConfirmDelete("Clear this day's note?")) {
                         note.value = "";
-
-                        localStorage.removeItem(
-                            storageKey
-                        );
-
+                        localStorage.removeItem(storageKey);
                     }
+                });
 
-                }
-            );
+                dayBox.appendChild(number);
+                dayBox.appendChild(note);
+                dayBox.appendChild(clearButton);
+                days.appendChild(dayBox);
+            }
 
-
-            /* =========================
-               PUT EVERYTHING TOGETHER
-            ========================= */
-
-            dayBox.appendChild(
-                number
-            );
-
-            dayBox.appendChild(
-                note
-            );
-
-            dayBox.appendChild(
-                clearButton
-            );
-
-            days.appendChild(
-                dayBox
-            );
-
+            calendarBox.appendChild(days);
+            monthContainer.appendChild(title);
+            monthContainer.appendChild(calendarBox);
+            calendar.appendChild(monthContainer);
         }
 
-
-        calendarBox.appendChild(
-            days
-        );
-
-        monthContainer.appendChild(
-            calendarBox
-        );
-
-        calendar.appendChild(
-            monthContainer
-        );
-
-    }
-
-
-    /* =========================
-       START CALENDAR
-    ========================= */
-
-    renderCalendar();
-
-
-</script>
-
+        renderCalendar();
+    </script>
 
 </body>
-
 </html>
