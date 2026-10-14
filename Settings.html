@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#B86F72" id="themeColor">
+
+    <meta name="theme-color" content="#F4E8E6" id="themeColor">
     <meta name="color-scheme" content="light">
+
     <title>Blank Space - Settings</title>
 
     <style>
@@ -14,36 +16,40 @@
 
         :root {
             color-scheme: light;
+
             --background: #F4E8E6;
             --card: #FFF9F7;
             --accent: #B86F72;
+            --accent-hover: #A65F63;
             --text: #593A3B;
             --muted: #806B6B;
-            --light-rose: #D9A6A6;
             --border: #D8C2C1;
-            --shadow: #593A3B14;
             --toggle-track: #D8C2C1;
             --topbar: #593A3B;
             --topbar-text: #FFF9F7;
+            --shadow: #593A3B14;
+            --success: #66866A;
+            --danger: #A65050;
         }
 
-        /* DARK THEME */
-        html.dark,
-        body.dark,
-        html.dark-mode,
-        body.dark-mode {
+        /* SOFT DARK MODE */
+
+        html.dark {
             color-scheme: dark;
+
             --background: #302A2B;
             --card: #403637;
             --accent: #D9A6A6;
+            --accent-hover: #E7BABA;
             --text: #F4E8E6;
             --muted: #C5B1B0;
-            --light-rose: #B86F72;
             --border: #5A494A;
-            --shadow: #00000033;
-            --toggle-track: #5A494A;
+            --toggle-track: #655354;
             --topbar: #292324;
             --topbar-text: #FFF9F7;
+            --shadow: #00000025;
+            --success: #A8C4A5;
+            --danger: #E3A1A1;
         }
 
         html {
@@ -54,10 +60,10 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background-color: var(--background);
+            background: var(--background);
             color: var(--text);
             font-family: Arial, sans-serif;
-            transition: background-color 0.25s, color 0.25s;
+            transition: background-color .2s, color .2s;
         }
 
         button,
@@ -66,37 +72,39 @@
         }
 
         button {
+            cursor: pointer;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* TOP BAR */
+        button:focus-visible,
+        input:focus-visible + .slider {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        /* HEADER */
 
         .topbar {
             min-height: 62px;
-            background: var(--topbar);
-            color: var(--topbar-text);
+            padding: 10px 16px;
             display: flex;
             align-items: center;
-            padding: 10px 16px;
-            gap: 14px;
+            gap: 12px;
+            background: var(--topbar);
+            color: var(--topbar-text);
             position: sticky;
             top: 0;
             z-index: 10;
         }
 
         .back {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
+            width: 42px;
+            height: 42px;
+            border: 0;
             border-radius: 10px;
             background: transparent;
             color: var(--topbar-text);
-            font-size: 27px;
-            cursor: pointer;
-            flex-shrink: 0;
+            font-size: 28px;
         }
 
         .back:active {
@@ -108,49 +116,58 @@
             font-weight: bold;
         }
 
-        /* SETTINGS LAYOUT */
+        /* MAIN CONTENT */
 
         .settings {
             width: 100%;
-            max-width: 620px;
+            max-width: 650px;
             margin: 0 auto;
             padding: 16px;
-            padding-bottom: 32px;
+            padding-bottom: 40px;
+        }
+
+        .intro {
+            margin: 4px 2px 22px;
+        }
+
+        .intro h2 {
+            margin: 0 0 7px;
+            font-size: 23px;
+            color: var(--text);
+        }
+
+        .intro p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         .section-title {
-            font-size: 13px;
-            font-weight: bold;
+            margin: 25px 4px 10px;
             color: var(--muted);
-            margin: 23px 4px 9px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 0.7px;
         }
 
-        .section-title:first-child {
-            margin-top: 5px;
-        }
-
-        .settings-card,
-        .about-card {
-            background: var(--card);
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+        .card {
             overflow: hidden;
-            box-shadow: 0 3px 8px var(--shadow);
-            transition:
-                background-color 0.25s,
-                border-color 0.25s,
-                color 0.25s;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            box-shadow: 0 3px 10px var(--shadow);
         }
+
+        /* SETTING ROWS */
 
         .setting {
-            min-height: 68px;
-            padding: 13px 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
+            min-height: 76px;
+            padding: 14px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -161,32 +178,29 @@
         .setting-info {
             flex: 1;
             min-width: 0;
-            padding-right: 4px;
         }
 
         .setting-name {
-            color: var(--text);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
-            line-height: 1.35;
-        }
-
-        .setting-description {
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 13px;
             line-height: 1.4;
         }
 
-        /* TOGGLE */
+        .setting-description {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* SWITCHES */
 
         .toggle {
             position: relative;
-            width: 48px;
+            display: inline-block;
+            width: 49px;
             height: 28px;
             flex-shrink: 0;
-            display: inline-block;
-            cursor: pointer;
         }
 
         .toggle input {
@@ -201,7 +215,7 @@
             inset: 0;
             background: var(--toggle-track);
             border-radius: 30px;
-            transition: background 0.2s;
+            transition: background .2s;
         }
 
         .slider::before {
@@ -213,8 +227,8 @@
             top: 3px;
             background: #FFFFFF;
             border-radius: 50%;
-            box-shadow: 0 1px 3px #00000025;
-            transition: transform 0.2s;
+            box-shadow: 0 1px 3px #00000030;
+            transition: transform .2s;
         }
 
         .toggle input:checked + .slider {
@@ -222,77 +236,97 @@
         }
 
         .toggle input:checked + .slider::before {
-            transform: translateX(20px);
+            transform: translateX(21px);
         }
 
-        .toggle input:focus-visible + .slider {
-            outline: 3px solid var(--accent);
-            outline-offset: 3px;
+        /* ACTION BUTTONS */
+
+        .action-button {
+            display: block;
+            width: 100%;
+            min-height: 44px;
+            padding: 11px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card);
+            color: var(--text);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .action-button:active {
+            opacity: .8;
+        }
+
+        .action-button.primary {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+        }
+
+        .action-button + .action-button {
+            margin-top: 9px;
+        }
+
+        .status {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .status.success {
+            color: var(--success);
+        }
+
+        .status.error {
+            color: var(--danger);
         }
 
         /* ABOUT */
 
-        .about-card {
-            padding: 17px;
+        .about {
+            padding: 18px;
         }
 
         .about-name {
-            color: var(--text);
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
         }
 
-        .version {
+        .about-version {
             margin-top: 5px;
             color: var(--muted);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .about-description {
             margin-top: 12px;
             color: var(--muted);
             font-size: 13px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* MOBILE */
+        .footer {
+            margin-top: 25px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.6;
+        }
 
-        @media (max-width: 600px) {
-            .topbar {
-                min-height: 58px;
-                padding: 8px 12px;
-                gap: 10px;
+        @media (max-width: 400px) {
+            .settings {
+                padding: 12px;
+            }
+
+            .setting {
+                gap: 9px;
+                padding: 12px;
             }
 
             .page-title {
                 font-size: 21px;
-            }
-
-            .settings {
-                padding: 12px;
-                padding-bottom: 26px;
-            }
-
-            .section-title {
-                margin-top: 20px;
-            }
-
-            .setting {
-                min-height: 64px;
-                padding: 12px;
-                gap: 9px;
-            }
-
-            .setting-name {
-                font-size: 15px;
-            }
-
-            .setting-description {
-                font-size: 12px;
-            }
-
-            .about-card {
-                padding: 15px;
             }
         }
 
@@ -300,7 +334,7 @@
             *,
             *::before,
             *::after {
-                transition-duration: 0.01ms !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
@@ -308,221 +342,397 @@
 
 <body>
 
-    <header class="topbar">
-        <button
-            class="back"
-            type="button"
-            onclick="goBack()"
-            aria-label="Go back"
-        >←</button>
+<header class="topbar">
+    <button
+        class="back"
+        type="button"
+        onclick="goBack()"
+        aria-label="Return to Notes"
+    >←</button>
 
-        <div class="page-title">Settings</div>
-    </header>
+    <div class="page-title">Settings</div>
+</header>
 
-    <main class="settings">
+<main class="settings">
 
-        <div class="section-title">Appearance</div>
+    <section class="intro">
+        <h2>Make it yours.</h2>
+        <p>
+            Customize Blank Space to make it feel comfortable
+            and work the way you want.
+        </p>
+    </section>
 
-        <section class="settings-card">
-            <div class="setting">
-                <div class="setting-info">
-                    <div class="setting-name">Dark Mode</div>
-                    <div class="setting-description">
-                        Use a darker color theme.
-                    </div>
+    <!-- APPEARANCE -->
+
+    <div class="section-title">Appearance</div>
+
+    <section class="card">
+
+        <div class="setting">
+            <div class="setting-info">
+                <div class="setting-name">Dark Mode</div>
+                <div class="setting-description">
+                    Use a softer, darker color palette.
                 </div>
-
-                <label class="toggle">
-                    <input
-                        type="checkbox"
-                        id="darkModeToggle"
-                        aria-label="Dark Mode"
-                        onchange="toggleDarkMode()"
-                    >
-                    <span class="slider"></span>
-                </label>
             </div>
-        </section>
 
-        <div class="section-title">Reminders</div>
+            <label class="toggle">
+                <input
+                    id="darkModeToggle"
+                    type="checkbox"
+                    aria-label="Enable Dark Mode"
+                >
+                <span class="slider"></span>
+            </label>
+        </div>
 
-        <section class="settings-card">
-            <div class="setting">
-                <div class="setting-info">
-                    <div class="setting-name">Notifications</div>
-                    <div class="setting-description">
-                        Enable or disable reminder notifications.
-                    </div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="section-title">Notifications</div>
+
+    <section class="card">
+
+        <div class="setting">
+            <div class="setting-info">
+                <div class="setting-name">Reminder Notifications</div>
+                <div class="setting-description">
+                    Allow Blank Space to request permission
+                    to send notifications.
                 </div>
-
-                <label class="toggle">
-                    <input
-                        type="checkbox"
-                        id="notificationsToggle"
-                        aria-label="Notifications"
-                        onchange="toggleNotifications()"
-                    >
-                    <span class="slider"></span>
-                </label>
             </div>
-        </section>
 
-        <div class="section-title">General</div>
+            <label class="toggle">
+                <input
+                    id="notificationsToggle"
+                    type="checkbox"
+                    aria-label="Enable Reminder Notifications"
+                >
+                <span class="slider"></span>
+            </label>
+        </div>
 
-        <section class="settings-card">
-            <div class="setting">
-                <div class="setting-info">
-                    <div class="setting-name">
-                        Confirm Before Deleting
-                    </div>
-                    <div class="setting-description">
-                        Ask before deleting notes, lists, or reminders.
-                    </div>
+        <div style="padding: 14px;">
+            <button
+                class="action-button primary"
+                id="notificationButton"
+                type="button"
+            >
+                Enable Notifications
+            </button>
+
+            <div
+                class="status"
+                id="notificationStatus"
+                role="status"
+                aria-live="polite"
+            >
+                Notification permission has not been checked.
+            </div>
+        </div>
+
+    </section>
+
+    <!-- GENERAL -->
+
+    <div class="section-title">General</div>
+
+    <section class="card">
+
+        <div class="setting">
+            <div class="setting-info">
+                <div class="setting-name">Confirm Before Deleting</div>
+                <div class="setting-description">
+                    Ask before deleting notes, lists, or reminders.
                 </div>
-
-                <label class="toggle">
-                    <input
-                        type="checkbox"
-                        id="deleteConfirmToggle"
-                        aria-label="Confirm Before Deleting"
-                        onchange="toggleDeleteConfirmation()"
-                    >
-                    <span class="slider"></span>
-                </label>
             </div>
-        </section>
 
-        <div class="section-title">About</div>
+            <label class="toggle">
+                <input
+                    id="deleteConfirmToggle"
+                    type="checkbox"
+                    aria-label="Confirm Before Deleting"
+                >
+                <span class="slider"></span>
+            </label>
+        </div>
 
-        <section class="about-card">
-            <div class="about-name">Blank Space</div>
-            <div class="version">Version 1.0</div>
-            <div class="about-description">
-                A simple space for your notes, lists, and reminders.
-            </div>
-        </section>
+    </section>
 
-    </main>
+    <!-- ABOUT -->
 
-    <script>
-        const darkModeToggle =
-            document.getElementById("darkModeToggle");
+    <div class="section-title">About</div>
 
-        const notificationsToggle =
-            document.getElementById("notificationsToggle");
+    <section class="card about">
+        <div class="about-name">Blank Space</div>
+        <div class="about-version">Version 1.0</div>
 
-        const deleteConfirmToggle =
-            document.getElementById("deleteConfirmToggle");
+        <div class="about-description">
+            A calm little space for your notes, lists, calendar,
+            and reminders.
+        </div>
+    </section>
 
-        const themeColorMeta =
-            document.getElementById("themeColor");
+    <div class="footer">
+        Blank Space<br>
+        Your space, your thoughts.
+    </div>
 
-        /* APPLY THEME */
+</main>
 
-        function applyTheme(enabled) {
-            const roots = [
-                document.documentElement,
-                document.body
-            ];
+<script>
+(function () {
+    "use strict";
 
-            roots.forEach(function (element) {
-                element.classList.toggle("dark", enabled);
-                element.classList.toggle("dark-mode", enabled);
-            });
+    const darkModeToggle =
+        document.getElementById("darkModeToggle");
 
-            document.documentElement.style.colorScheme =
-                enabled ? "dark" : "light";
+    const notificationsToggle =
+        document.getElementById("notificationsToggle");
 
-            document.querySelector('meta[name="color-scheme"]')
-                .setAttribute(
-                    "content",
-                    enabled ? "dark" : "light"
-                );
+    const deleteConfirmToggle =
+        document.getElementById("deleteConfirmToggle");
 
-            themeColorMeta.setAttribute(
-                "content",
-                enabled ? "#292324" : "#B86F72"
-            );
+    const themeColor =
+        document.getElementById("themeColor");
+
+    const notificationButton =
+        document.getElementById("notificationButton");
+
+    const notificationStatus =
+        document.getElementById("notificationStatus");
+
+    /*
+     * THEME
+     *
+     * Save the preference under the same key used by the other pages:
+     * localStorage["darkMode"]
+     */
+
+    function applyTheme(enabled) {
+        document.documentElement.classList.toggle("dark", enabled);
+
+        document.documentElement.style.colorScheme =
+            enabled ? "dark" : "light";
+
+        document.querySelector('meta[name="color-scheme"]')
+            .setAttribute("content", enabled ? "dark" : "light");
+
+        themeColor.setAttribute(
+            "content",
+            enabled ? "#292324" : "#F4E8E6"
+        );
+    }
+
+    function saveSetting(key, value) {
+        try {
+            localStorage.setItem(key, String(value));
+            return true;
+        } catch (error) {
+            console.error("Could not save setting:", key, error);
+            return false;
+        }
+    }
+
+    function loadSettings() {
+        let darkMode = false;
+        let notifications = false;
+        let confirmDelete = true;
+
+        try {
+            darkMode =
+                localStorage.getItem("darkMode") === "true";
+
+            notifications =
+                localStorage.getItem("notifications") === "true";
+
+            confirmDelete =
+                localStorage.getItem("deleteConfirmation") !== "false";
+        } catch (error) {
+            console.error("Could not load settings:", error);
         }
 
-        /* LOAD SETTINGS */
+        darkModeToggle.checked = darkMode;
+        applyTheme(darkMode);
 
-        function loadSettings() {
-            let darkMode = false;
+        deleteConfirmToggle.checked = confirmDelete;
 
-            try {
-                darkMode =
-                    localStorage.getItem("darkMode") === "true";
+        /*
+         * A saved preference is not proof that browser permission
+         * is currently granted. Check the actual permission below.
+         */
+        updateNotificationUI(notifications);
+    }
 
-                notificationsToggle.checked =
-                    localStorage.getItem("notifications") !== "false";
+    darkModeToggle.addEventListener("change", function () {
+        const enabled = darkModeToggle.checked;
 
-                deleteConfirmToggle.checked =
-                    localStorage.getItem("deleteConfirmation") !== "false";
-            } catch (error) {
-                console.warn("Could not load saved settings.", error);
+        applyTheme(enabled);
 
-                notificationsToggle.checked = true;
-                deleteConfirmToggle.checked = true;
+        if (!saveSetting("darkMode", enabled)) {
+            notificationStatus.textContent =
+                "The theme could not be saved by this browser.";
+        }
+    });
+
+    deleteConfirmToggle.addEventListener("change", function () {
+        saveSetting(
+            "deleteConfirmation",
+            deleteConfirmToggle.checked
+        );
+    });
+
+    /*
+     * NOTIFICATION PERMISSION
+     *
+     * This requests permission only. Actual scheduled reminder
+     * notifications require additional reminder/scheduling code.
+     */
+
+    function updateNotificationUI(preference) {
+        if (!("Notification" in window)) {
+            notificationsToggle.checked = false;
+            notificationsToggle.disabled = true;
+            notificationButton.disabled = true;
+
+            notificationStatus.textContent =
+                "This browser does not support notifications here.";
+
+            return;
+        }
+
+        notificationsToggle.disabled = false;
+        notificationButton.disabled = false;
+
+        const permission = Notification.permission;
+
+        if (permission === "granted") {
+            notificationsToggle.checked = preference;
+            notificationButton.textContent = "Notifications Allowed";
+
+            notificationStatus.textContent = preference
+                ? "Permission granted. Reminder scheduling must also be configured."
+                : "Browser permission is granted, but notifications are turned off in Blank Space.";
+
+            notificationStatus.className = "status success";
+        } else if (permission === "denied") {
+            notificationsToggle.checked = false;
+            notificationButton.textContent = "Notifications Blocked";
+
+            notificationStatus.textContent =
+                "Notifications are blocked in browser settings. Allow them there to use this feature.";
+
+            notificationStatus.className = "status error";
+        } else {
+            notificationsToggle.checked = false;
+            notificationButton.textContent = "Enable Notifications";
+
+            notificationStatus.textContent =
+                "Allow notifications to let Blank Space request permission.";
+
+            notificationStatus.className = "status";
+        }
+    }
+
+    async function requestNotificationPermission() {
+        if (!("Notification" in window)) {
+            updateNotificationUI(false);
+            return;
+        }
+
+        if (!window.isSecureContext) {
+            notificationStatus.textContent =
+                "Notifications require a secure website, such as your HTTPS GitHub Pages site.";
+
+            notificationStatus.className = "status error";
+            return;
+        }
+
+        if (Notification.permission === "granted") {
+            notificationsToggle.checked = true;
+            saveSetting("notifications", true);
+            updateNotificationUI(true);
+            return;
+        }
+
+        if (Notification.permission === "denied") {
+            updateNotificationUI(false);
+            return;
+        }
+
+        try {
+            const permission =
+                await Notification.requestPermission();
+
+            const enabled = permission === "granted";
+
+            notificationsToggle.checked = enabled;
+            saveSetting("notifications", enabled);
+
+            updateNotificationUI(enabled);
+
+            if (!enabled && permission === "default") {
+                notificationStatus.textContent =
+                    "Permission was not granted. You can try again later.";
             }
+        } catch (error) {
+            console.error("Notification permission error:", error);
 
-            darkModeToggle.checked = darkMode;
-            applyTheme(darkMode);
+            notificationStatus.textContent =
+                "Could not request permission. Check your browser settings.";
+
+            notificationStatus.className = "status error";
+        }
+    }
+
+    notificationButton.addEventListener(
+        "click",
+        requestNotificationPermission
+    );
+
+    notificationsToggle.addEventListener("change", async function () {
+        if (notificationsToggle.checked) {
+            await requestNotificationPermission();
+        } else {
+            saveSetting("notifications", false);
+            updateNotificationUI(false);
+        }
+    });
+
+    /*
+     * BACK NAVIGATION
+     */
+
+    window.goBack = function () {
+        window.location.href = "notes.html";
+    };
+
+    /*
+     * UPDATE WHEN THE PAGE RETURNS TO THE FOREGROUND
+     */
+
+    document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) {
+            loadSettings();
+        }
+    });
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === "darkMode") {
+            applyTheme(event.newValue === "true");
+            darkModeToggle.checked = event.newValue === "true";
         }
 
-        /* SAVE DARK MODE */
-
-        function toggleDarkMode() {
-            const enabled = darkModeToggle.checked;
-
-            applyTheme(enabled);
-
-            try {
-                localStorage.setItem(
-                    "darkMode",
-                    enabled ? "true" : "false"
-                );
-            } catch (error) {
-                console.warn("Could not save the theme setting.", error);
-            }
+        if (event.key === "notifications") {
+            updateNotificationUI(event.newValue === "true");
         }
+    });
 
-        /* SAVE NOTIFICATIONS */
-
-        function toggleNotifications() {
-            try {
-                localStorage.setItem(
-                    "notifications",
-                    String(notificationsToggle.checked)
-                );
-            } catch (error) {
-                console.warn("Could not save notifications.", error);
-            }
-        }
-
-        /* SAVE DELETE CONFIRMATION */
-
-        function toggleDeleteConfirmation() {
-            try {
-                localStorage.setItem(
-                    "deleteConfirmation",
-                    String(deleteConfirmToggle.checked)
-                );
-            } catch (error) {
-                console.warn("Could not save delete confirmation.", error);
-            }
-        }
-
-        /* BACK TO NOTES */
-
-        function goBack() {
-            window.location.href = "notes.html";
-        }
-
-        /* INITIALIZE */
-
-        loadSettings();
-    </script>
+    loadSettings();
+})();
+</script>
 
 </body>
 </html>
