@@ -4,7 +4,7 @@
   "start_url": "/BlankSpace/notes.html",
   "scope": "/BlankSpace/",
   "display": "standalone",
-  "background_color": "#FF0000",
+  "background_color": "#F00000",
   "theme_color": "#B86F72",
   "description": "An all-in-one notepad app",
   "icons": [
