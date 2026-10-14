@@ -27,7 +27,11 @@
             --topbar-text: #FFF9F7;
         }
 
-        body.dark {
+        /* DARK THEME */
+        html.dark,
+        body.dark,
+        html.dark-mode,
+        body.dark-mode {
             color-scheme: dark;
             --background: #302A2B;
             --card: #403637;
@@ -44,7 +48,7 @@
 
         html {
             min-height: 100%;
-            background: #F4E8E6;
+            background: var(--background);
         }
 
         body {
@@ -54,11 +58,6 @@
             color: var(--text);
             font-family: Arial, sans-serif;
             transition: background-color 0.25s, color 0.25s;
-        }
-
-        body:not(.dark) {
-            background-color: #F4E8E6;
-            color: #593A3B;
         }
 
         button,
@@ -309,8 +308,6 @@
 
 <body>
 
-    <!-- TOP BAR -->
-
     <header class="topbar">
         <button
             class="back"
@@ -321,8 +318,6 @@
 
         <div class="page-title">Settings</div>
     </header>
-
-    <!-- SETTINGS -->
 
     <main class="settings">
 
@@ -410,8 +405,6 @@
     </main>
 
     <script>
-        /* ELEMENTS */
-
         const darkModeToggle =
             document.getElementById("darkModeToggle");
 
@@ -424,10 +417,18 @@
         const themeColorMeta =
             document.getElementById("themeColor");
 
-        /* THEME */
+        /* APPLY THEME */
 
         function applyTheme(enabled) {
-            document.body.classList.toggle("dark", enabled);
+            const roots = [
+                document.documentElement,
+                document.body
+            ];
+
+            roots.forEach(function (element) {
+                element.classList.toggle("dark", enabled);
+                element.classList.toggle("dark-mode", enabled);
+            });
 
             document.documentElement.style.colorScheme =
                 enabled ? "dark" : "light";
@@ -444,7 +445,7 @@
             );
         }
 
-        /* LOAD SAVED SETTINGS */
+        /* LOAD SETTINGS */
 
         function loadSettings() {
             let darkMode = false;
@@ -469,7 +470,7 @@
             applyTheme(darkMode);
         }
 
-        /* DARK MODE */
+        /* SAVE DARK MODE */
 
         function toggleDarkMode() {
             const enabled = darkModeToggle.checked;
@@ -479,56 +480,46 @@
             try {
                 localStorage.setItem(
                     "darkMode",
-                    String(enabled)
+                    enabled ? "true" : "false"
                 );
             } catch (error) {
                 console.warn("Could not save the theme setting.", error);
             }
         }
 
-        /* NOTIFICATIONS */
+        /* SAVE NOTIFICATIONS */
 
         function toggleNotifications() {
-            const enabled = notificationsToggle.checked;
-
             try {
                 localStorage.setItem(
                     "notifications",
-                    String(enabled)
+                    String(notificationsToggle.checked)
                 );
             } catch (error) {
-                console.warn(
-                    "Could not save the notification setting.",
-                    error
-                );
+                console.warn("Could not save notifications.", error);
             }
         }
 
-        /* DELETE CONFIRMATION */
+        /* SAVE DELETE CONFIRMATION */
 
         function toggleDeleteConfirmation() {
-            const enabled = deleteConfirmToggle.checked;
-
             try {
                 localStorage.setItem(
                     "deleteConfirmation",
-                    String(enabled)
+                    String(deleteConfirmToggle.checked)
                 );
             } catch (error) {
-                console.warn(
-                    "Could not save the deletion setting.",
-                    error
-                );
+                console.warn("Could not save delete confirmation.", error);
             }
         }
 
-        /* GO BACK */
+        /* BACK TO NOTES */
 
         function goBack() {
             window.location.href = "notes.html";
         }
 
-        /* START */
+        /* INITIALIZE */
 
         loadSettings();
     </script>
